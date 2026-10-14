@@ -1,0 +1,110 @@
+{
+  "output": "D:\\Personal Projects\\optha-edge-dr\\optha-edge-dr\\docs\\project_report\\OpthaEdge_Engineering_Project_Report.docx",
+  "figures": [
+    [
+      1,
+      "Implemented architecture and planned services"
+    ],
+    [
+      2,
+      "Sequence of a research prediction request"
+    ],
+    [
+      3,
+      "Selected data relationships and implementation boundaries"
+    ],
+    [
+      4,
+      "Task-specific preprocessing and output decoding"
+    ],
+    [
+      5,
+      "Research task selection in the actual application"
+    ],
+    [
+      6,
+      "Actual image-upload interface"
+    ],
+    [
+      7,
+      "Model-information page and validation blockers"
+    ],
+    [
+      8,
+      "Proposed deployment target with explicit missing integrations"
+    ]
+  ],
+  "tables": [
+    [
+      1,
+      "Abbreviations"
+    ],
+    [
+      2,
+      "Relevant literature and engineering implications"
+    ],
+    [
+      3,
+      "Functional requirements and implementation status"
+    ],
+    [
+      4,
+      "Nonfunctional requirements and remaining evidence"
+    ],
+    [
+      5,
+      "Data flows and persistence boundaries"
+    ],
+    [
+      6,
+      "Selected entities and integrity responsibilities"
+    ],
+    [
+      7,
+      "Implementation module map"
+    ],
+    [
+      8,
+      "Prediction API error taxonomy"
+    ],
+    [
+      9,
+      "Existing unit-test groups"
+    ],
+    [
+      10,
+      "Recorded local HTTP checks"
+    ],
+    [
+      11,
+      "Requirements mapped to available evidence"
+    ],
+    [
+      12,
+      "Results interpretation"
+    ],
+    [
+      13,
+      "Engineering risk register"
+    ],
+    [
+      14,
+      "Operational symptoms and investigation"
+    ],
+    [
+      15,
+      "Proposed development stages and exit evidence"
+    ],
+    [
+      16,
+      "Recorded verification environment"
+    ],
+    [
+      17,
+      "Claims mapped to primary project files"
+    ]
+  ],
+  "references": 9,
+  "paragraph_words": 4877,
+  "source_commit": "0099145dc14547c30484798042b029fbf58df1eb"
+}

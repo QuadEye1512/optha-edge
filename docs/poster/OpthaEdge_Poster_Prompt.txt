@@ -1,0 +1,27 @@
+Use case: scientific-educational.
+Create a polished, high-resolution PORTRAIT academic engineering exhibition poster for the real project OpthaEdge. Flat finished poster, straight-on, no room mockup, no frame. Portrait approximately A-series aspect ratio. Professional editorial typography, crisp readable exact text, generous margins, strong alignment, white/light background with deep navy and cyan accents inspired by the project's interface. Sophisticated biomedical visual design, not a generic template.
+Top: very large title "OpthaEdge". Subtitle "AI-Assisted Diabetic Retinopathy Screening". Small label "ENGINEERING PROJECT".
+Hero visual: beautifully crafted stylized retinal fundus with delicate branching vessels, integrated with subtle neural-network lines and a scanning motif. This is a conceptual illustration, never a patient example or measured diagnostic result. Adjacent clear short description: "A web-based research platform for retinal image analysis using local ONNX inference."
+Middle: two balanced feature panels with restrained icons:
+"BINARY SCREENING"
+"DR / No DR model outputs"
+"224 × 224 input"
+"SEVERITY GRADING"
+"Five-level model outputs"
+"299 × 299 input"
+Below: clean left-to-right architecture/workflow diagram with five clearly separated stages, connecting arrows only between adjacent stages:
+"Upload image" → "Validate & preprocess" → "ONNX inference" → "Decode scores" → "Review results"
+Then a neat compact features band with exactly:
+"Local CPU inference"
+"Task-specific preprocessing"
+"Versioned model metadata"
+Then technology line "Next.js • React • TypeScript • ONNX Runtime • Sharp".
+Small but legible research status line above footer: "Research prototype — clinical validation pending."
+BOTTOM CREDITS: reserve the entire bottom fifth of poster for a strong, uncluttered navy panel with white typography. ALL MEMBERS AND GUIDE MUST BE HERE AT THE BOTTOM, fully visible, well within margins, exact spelling and exact IDs. Use heading "GROUP MEMBERS", followed by three large legible centered lines:
+"Faizan Shaikh (24108A2005)"
+"Ayaan Shaikh (24108A2008)"
+"Shamail Pawar (24108A2018)"
+Then a distinct guide line below with clear spacing:
+"GUIDE"
+"Prof. Nayana Mahajan"
+Prioritize credit legibility. Do not abbreviate or change any name or number. No additional people, no invented university logos, no QR code, no citations, no fake accuracy numbers, no claims of clinical approval, no fabricated screenshots, no watermarks. Make the poster visually impressive, academic, and ready to display. All text should be easy to read; avoid tiny text and overcrowding.

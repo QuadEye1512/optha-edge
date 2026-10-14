@@ -1,0 +1,27 @@
+{
+  "output": "D:\\Personal Projects\\optha-edge-dr\\optha-edge-dr\\docs\\research_paper\\OpthaEdge_JCST_Thesis_Overview.docx",
+  "source_sha256": "ba8ba70a8a45c3435a26d9347510e27a56f3b851e116895d61c9724a20ebb268",
+  "template_sha256": "a1937a1b6e28b954c8f9d797c036bd186c0c89fcc4c23fc3d9362ff13d6cdf25",
+  "unchanged_parts": [
+    "[Content_Types].xml",
+    "_rels/.rels",
+    "word/endnotes.xml",
+    "word/header1.xml",
+    "word/media/image1.png",
+    "word/theme/theme1.xml",
+    "word/settings.xml",
+    "word/styles.xml",
+    "word/numbering.xml",
+    "docProps/app.xml",
+    "customXml/_rels/item1.xml.rels",
+    "customXml/itemProps1.xml",
+    "customXml/item1.xml",
+    "word/fontTable.xml",
+    "word/webSettings.xml",
+    "word/stylesWithEffects.xml"
+  ],
+  "word_count": 1112,
+  "figures": 2,
+  "tables": 1,
+  "references": 9
+}

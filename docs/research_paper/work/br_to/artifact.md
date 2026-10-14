@@ -1,0 +1,17 @@
+# JCST Thesis Overview adaptation
+
+Reference: C:/Users/Faizan Shaikh/Downloads/BR-TO-template-v1.7.docx.
+SHA256: a1937a1b6e28b954c8f9d797c036bd186c0c89fcc4c23fc3d9362ff13d6cdf25.
+Reference render: template_render/page-1.png, one page. Two continuous single-column sections have identical A4 geometry (11907 by 16839 twips), 1418-twip margins, 431-twip header and 1106-twip footer distances. First section has first-page distinction and an empty default header.
+
+Design: Times New Roman 10 pt body, justified with 6 pt paragraph spacing; single column. JCST-BR-TO label 14 pt bold left, JCST-Title title 14 pt bold centered (source direct override), JCST-Authors metadata 12 pt regular centered (source direct overrides); JCST-Abstract justified for main text. Existing FigureCaption and References styles are 8 pt. Keep the native styles, theme, numbering, settings, empty header and opaque parts unchanged. Source title block has two empty title lines; compact these to one intentional space to accommodate the real two-line title and author emails.
+
+Slot map: word/document.xml body p0 overview label; p3 title; p5 author names; p6 institutional affiliation; p7 degree removed because unprovided, replace only with confirmed department; p8 guide; p9 author emails; p10-16 main overview, repeat body style as needed. Remove p18 sample publication metadata textbox, sample ORCID graphic/link, and p7 sample footnote. Remove the unreferenced placeholder footnote and ORCID relationship. No DOI, acceptance date, publication citation, degree, ORCID or advisor email is invented.
+
+Content authority: ../../OpthaEdge_Research_Paper.docx and ../evidence_notes.md. Optional scope question was asked; absent a reply proceed with a concise overview matching the supplied three-page target. Condense methods and results without changing claims. Retain architecture and one authentic screening screenshot, compact verification table and nine references. Other diagrams/tables remain in the preserved full manuscript; their essential facts are summarized. Do not assert diagnostic accuracy or clinical validation. Use three pages if readable, at most four as the template permits for exceptional cases.
+
+Preservation plan: patch a copy of the reference ZIP; replace body, add image relationships/parts, remove obsolete ORCID relationship, remove sample footnote, update title/author core metadata and content types if needed. Reuse source section geometry; collapse the redundant continuous section. Keep other parts byte-identical. Record before/after package hashes. Preserve both input documents.
+
+QA: Render with the already verified Word COM fallback; inspect all final page PNGs, captions, table widths, citations and pagination. Check no template sample metadata remains, all nine references are cited, picture parts are genuine source images, and input file hashes are unchanged. Output ../../OpthaEdge_JCST_Thesis_Overview.docx.
+
+Completed QA: final Word rendering is three pages, all visually inspected. No clipped content, orphaned captions, split tables or placeholder publication information. Two embedded project figures match the source image bytes. One verification table and all nine unchanged references are present; all references are cited in overview prose. Sixteen template parts remain byte-identical, including native styles, numbering, theme, settings and header. Both input file hashes remain unchanged. Degree details, advisor email, ORCID and full-thesis URL remain unprovided and were omitted rather than fabricated.

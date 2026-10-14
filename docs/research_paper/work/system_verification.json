@@ -1,0 +1,157 @@
+{
+  "date": "2026-09-29T07:19:19.641Z",
+  "node": "v25.5.0",
+  "platform": "win32",
+  "cpu": "Intel(R) Core(TM) i7-10850H CPU @ 2.70GHz",
+  "logicalProcessors": 12,
+  "commit": "0099145dc14547c30484798042b029fbf58df1eb",
+  "input": "One constant-color 512x512 RGB PNG; no fundus photograph or patient information",
+  "results": [
+    {
+      "name": "Missing image",
+      "status": 400,
+      "expectedStatus": 400,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "MISSING_IMAGE",
+          "message": "Provide one image file using the \"image\" field."
+        }
+      }
+    },
+    {
+      "name": "Unsupported mode",
+      "status": 400,
+      "expectedStatus": 400,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "INVALID_MODE",
+          "message": "Mode must be either \"binary\" or \"severity\"."
+        }
+      }
+    },
+    {
+      "name": "Empty file",
+      "status": 400,
+      "expectedStatus": 400,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "EMPTY_FILE",
+          "message": "The uploaded image is empty."
+        }
+      }
+    },
+    {
+      "name": "Non-image content",
+      "status": 415,
+      "expectedStatus": 415,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "UNSUPPORTED_IMAGE_CONTENT",
+          "message": "The file content is not a supported JPEG or PNG image."
+        }
+      }
+    },
+    {
+      "name": "MIME mismatch",
+      "status": 400,
+      "expectedStatus": 400,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "MIME_CONTENT_MISMATCH",
+          "message": "The declared file type does not match the image content."
+        }
+      }
+    },
+    {
+      "name": "Corrupt PNG",
+      "status": 400,
+      "expectedStatus": 400,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "CORRUPT_IMAGE",
+          "message": "The image is corrupt or cannot be decoded."
+        }
+      }
+    },
+    {
+      "name": "Oversize file",
+      "status": 413,
+      "expectedStatus": 413,
+      "pass": true,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "FILE_TOO_LARGE",
+          "message": "The image exceeds the 10 MB upload limit."
+        }
+      }
+    },
+    {
+      "name": "RGB synthetic binary smoke test",
+      "status": 200,
+      "expectedStatus": 200,
+      "pass": true,
+      "body": {
+        "success": true,
+        "result": {
+          "mode": "binary",
+          "binary": {
+            "prediction": "No DR",
+            "probability": 0.2029,
+            "confidence": 79.71
+          },
+          "inferenceTimeMs": 13.68,
+          "model": {
+            "modelId": "opthaedge-dr-binary",
+            "artifactVersion": "sha256:dfc49e28bb3927ec47691320a12ae95d9af86b64bc16dd1240d56903d798f0d0",
+            "preprocessingVersion": "binary-imagenet-cover-224-v1",
+            "clinicalDeploymentStatus": "blocked-pending-validation"
+          }
+        }
+      }
+    },
+    {
+      "name": "RGB synthetic severity smoke test",
+      "status": 200,
+      "expectedStatus": 200,
+      "pass": true,
+      "body": {
+        "success": true,
+        "result": {
+          "mode": "severity",
+          "severity": {
+            "level": "Severe",
+            "rawScore": 2.1843,
+            "levelIndex": 3,
+            "probabilities": [
+              0.223,
+              0.1236,
+              0.0932,
+              0.3665,
+              0.1937
+            ]
+          },
+          "inferenceTimeMs": 42.64,
+          "model": {
+            "modelId": "opthaedge-dr-severity-inceptionv3",
+            "artifactVersion": "sha256:a75ff338af12bb31b66e05403b4b8ab989ea7c2213aa42447642d6b348028836",
+            "preprocessingVersion": "severity-inception-cover-299-v1",
+            "clinicalDeploymentStatus": "blocked-pending-validation"
+          }
+        }
+      }
+    }
+  ]
+}

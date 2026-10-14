@@ -1,0 +1,24 @@
+{
+  "output": "D:\\Personal Projects\\optha-edge-dr\\optha-edge-dr\\docs\\research_paper\\OpthaEdge_ACDSA_Research_Paper.docx",
+  "figures": 5,
+  "tables": 3,
+  "references": 9,
+  "unchanged_template_parts": [
+    "_rels/.rels",
+    "word/header1.xml",
+    "word/endnotes.xml",
+    "word/footnotes.xml",
+    "word/theme/theme1.xml",
+    "word/settings.xml",
+    "word/styles.xml",
+    "word/numbering.xml",
+    "customXml/_rels/item1.xml.rels",
+    "customXml/itemProps1.xml",
+    "word/fontTable.xml",
+    "customXml/item1.xml",
+    "word/webSettings.xml",
+    "docProps/app.xml"
+  ],
+  "source_sha256": "ba8ba70a8a45c3435a26d9347510e27a56f3b851e116895d61c9724a20ebb268",
+  "template_sha256": "555c453835953f7b3bfec77f687bf2d469a33823cf7129ffbcb92f6fb1502cc1"
+}

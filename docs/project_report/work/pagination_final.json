@@ -1,0 +1,385 @@
+﻿{
+    "pages":  30,
+    "tocCount":  1,
+    "headings":  [
+                     {
+                         "style":  "Heading 1",
+                         "page":  2,
+                         "text":  "Abstract",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  2,
+                         "text":  "Acknowledgment",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  4,
+                         "text":  "List of figures and tables",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  4,
+                         "text":  "List of figures",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  4,
+                         "text":  "List of tables",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  5,
+                         "text":  "Abbreviations and report conventions",
+                         "printedPage":  4
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  6,
+                         "text":  "1 Introduction",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  6,
+                         "text":  "1.1 Background and motivation",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  6,
+                         "text":  "1.2 Problem statement",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  6,
+                         "text":  "1.3 Objectives",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  6,
+                         "text":  "1.4 Scope",
+                         "printedPage":  1
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  7,
+                         "text":  "2 Literature and technical background",
+                         "printedPage":  2
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  7,
+                         "text":  "2.1 Technical foundations",
+                         "printedPage":  2
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  7,
+                         "text":  "2.2 Project contribution",
+                         "printedPage":  2
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  8,
+                         "text":  "3 Requirements and feasibility",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  8,
+                         "text":  "3.1 Actors and operating assumptions",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  8,
+                         "text":  "3.2 Input and output requirements",
+                         "printedPage":  3
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  9,
+                         "text":  "3.3 Nonfunctional requirements",
+                         "printedPage":  4
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  9,
+                         "text":  "3.4 Feasibility assessment",
+                         "printedPage":  4
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  9,
+                         "text":  "3.5 Development hardware and software",
+                         "printedPage":  4
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  10,
+                         "text":  "4 System design",
+                         "printedPage":  5
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  10,
+                         "text":  "4.1 Implemented architecture",
+                         "printedPage":  5
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  11,
+                         "text":  "4.2 Request sequence and data flow",
+                         "printedPage":  6
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  11,
+                         "text":  "Data-flow boundaries",
+                         "printedPage":  6
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  12,
+                         "text":  "4.3 Database design",
+                         "printedPage":  7
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  13,
+                         "text":  "4.4 Data dictionary and authorization",
+                         "printedPage":  8
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  13,
+                         "text":  "Session and patient access",
+                         "printedPage":  8
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  14,
+                         "text":  "5 Inference methodology",
+                         "printedPage":  9
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  14,
+                         "text":  "5.1 Separate task pipelines",
+                         "printedPage":  9
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  15,
+                         "text":  "5.2 Mathematical model and algorithms",
+                         "printedPage":  10
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  15,
+                         "text":  "Algorithm 1 Research inference",
+                         "printedPage":  10
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  16,
+                         "text":  "6 Implementation and API design",
+                         "printedPage":  11
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  16,
+                         "text":  "6.1 Technology choices",
+                         "printedPage":  11
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  16,
+                         "text":  "6.2 API request and result contract",
+                         "printedPage":  11
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  17,
+                         "text":  "6.3 Error handling and model governance",
+                         "printedPage":  12
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  17,
+                         "text":  "6.4 Registry semantics",
+                         "printedPage":  12
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  18,
+                         "text":  "7 User interface and workflow",
+                         "printedPage":  13
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  19,
+                         "text":  "7.1 Model information and user procedure",
+                         "printedPage":  14
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  19,
+                         "text":  "Research screening procedure",
+                         "printedPage":  14
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  19,
+                         "text":  "Patient workflow boundary",
+                         "printedPage":  14
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  20,
+                         "text":  "8 Testing and verification",
+                         "printedPage":  15
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  20,
+                         "text":  "8.1 Verification strategy and provenance",
+                         "printedPage":  15
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  20,
+                         "text":  "8.2 Test design principles",
+                         "printedPage":  15
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  21,
+                         "text":  "8.3 Integration checks and requirement traceability",
+                         "printedPage":  16
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  22,
+                         "text":  "9 Results and critical evaluation",
+                         "printedPage":  17
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  22,
+                         "text":  "9.1 Engineering results",
+                         "printedPage":  17
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  22,
+                         "text":  "9.2 Scientific limitations",
+                         "printedPage":  17
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  23,
+                         "text":  "9.3 Risk assessment and corrective priorities",
+                         "printedPage":  18
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  23,
+                         "text":  "9.4 Privacy and ethical scope",
+                         "printedPage":  18
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  24,
+                         "text":  "10 Installation and operation",
+                         "printedPage":  19
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  24,
+                         "text":  "10.1 Local setup sequence",
+                         "printedPage":  19
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  24,
+                         "text":  "10.2 Verification and build commands",
+                         "printedPage":  19
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  25,
+                         "text":  "10.3 Proposed deployment architecture",
+                         "printedPage":  20
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  26,
+                         "text":  "10.4 Operations and troubleshooting",
+                         "printedPage":  21
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  26,
+                         "text":  "Release and maintenance procedure",
+                         "printedPage":  21
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  27,
+                         "text":  "11 Future work and conclusion",
+                         "printedPage":  22
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  27,
+                         "text":  "11.1 Staged development plan",
+                         "printedPage":  22
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  27,
+                         "text":  "11.2 Conclusion",
+                         "printedPage":  22
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  28,
+                         "text":  "References",
+                         "printedPage":  23
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  29,
+                         "text":  "Appendix A Reproducibility and artifact identity",
+                         "printedPage":  24
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  29,
+                         "text":  "Artifact digests",
+                         "printedPage":  24
+                     },
+                     {
+                         "style":  "Heading 2",
+                         "page":  29,
+                         "text":  "Reproduction record to retain",
+                         "printedPage":  24
+                     },
+                     {
+                         "style":  "Heading 1",
+                         "page":  30,
+                         "text":  "Appendix B Source traceability",
+                         "printedPage":  25
+                     }
+                 ],
+    "words":  6481
+}
