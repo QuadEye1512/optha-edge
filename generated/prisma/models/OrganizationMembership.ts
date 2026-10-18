@@ -476,10 +476,6 @@ export type OrganizationMembershipUncheckedUpdateManyWithoutRoleNestedInput = {
   deleteMany?: Prisma.OrganizationMembershipScalarWhereInput | Prisma.OrganizationMembershipScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type OrganizationMembershipCreateWithoutOrganizationInput = {
   id?: string
   activeFrom?: Date | string

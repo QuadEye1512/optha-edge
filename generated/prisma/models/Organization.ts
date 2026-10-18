@@ -212,6 +212,8 @@ export type OrganizationWhereInput = {
   followUps?: Prisma.FollowUpListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  educationReports?: Prisma.PatientEducationListRelationFilter
+  reportShares?: Prisma.ReportShareListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -236,6 +238,8 @@ export type OrganizationOrderByWithRelationInput = {
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
   appointments?: Prisma.AppointmentOrderByRelationAggregateInput
   auditEvents?: Prisma.AuditEventOrderByRelationAggregateInput
+  educationReports?: Prisma.PatientEducationOrderByRelationAggregateInput
+  reportShares?: Prisma.ReportShareOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +267,8 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.FollowUpListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  educationReports?: Prisma.PatientEducationListRelationFilter
+  reportShares?: Prisma.ReportShareListRelationFilter
 }, "id" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -313,6 +319,8 @@ export type OrganizationCreateInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -337,6 +345,8 @@ export type OrganizationUncheckedCreateInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -361,6 +371,8 @@ export type OrganizationUpdateInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -385,6 +397,8 @@ export type OrganizationUncheckedUpdateInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -650,6 +664,34 @@ export type OrganizationUpdateOneRequiredWithoutAppointmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutAppointmentsInput, Prisma.OrganizationUpdateWithoutAppointmentsInput>, Prisma.OrganizationUncheckedUpdateWithoutAppointmentsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutEducationReportsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEducationReportsInput, Prisma.OrganizationUncheckedCreateWithoutEducationReportsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEducationReportsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutEducationReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutEducationReportsInput, Prisma.OrganizationUncheckedCreateWithoutEducationReportsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutEducationReportsInput
+  upsert?: Prisma.OrganizationUpsertWithoutEducationReportsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutEducationReportsInput, Prisma.OrganizationUpdateWithoutEducationReportsInput>, Prisma.OrganizationUncheckedUpdateWithoutEducationReportsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutReportSharesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutReportSharesInput, Prisma.OrganizationUncheckedCreateWithoutReportSharesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutReportSharesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutReportSharesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutReportSharesInput, Prisma.OrganizationUncheckedCreateWithoutReportSharesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutReportSharesInput
+  upsert?: Prisma.OrganizationUpsertWithoutReportSharesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutReportSharesInput, Prisma.OrganizationUpdateWithoutReportSharesInput>, Prisma.OrganizationUncheckedUpdateWithoutReportSharesInput>
+}
+
 export type OrganizationCreateNestedOneWithoutAuditEventsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAuditEventsInput, Prisma.OrganizationUncheckedCreateWithoutAuditEventsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAuditEventsInput
@@ -685,6 +727,8 @@ export type OrganizationCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembershipsInput = {
@@ -708,6 +752,8 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembershipsInput = {
@@ -747,6 +793,8 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
@@ -770,6 +818,8 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPatientsInput = {
@@ -793,6 +843,8 @@ export type OrganizationCreateWithoutPatientsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPatientsInput = {
@@ -816,6 +868,8 @@ export type OrganizationUncheckedCreateWithoutPatientsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPatientsInput = {
@@ -855,6 +909,8 @@ export type OrganizationUpdateWithoutPatientsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPatientsInput = {
@@ -878,6 +934,8 @@ export type OrganizationUncheckedUpdateWithoutPatientsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutConsentRecordsInput = {
@@ -901,6 +959,8 @@ export type OrganizationCreateWithoutConsentRecordsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutConsentRecordsInput = {
@@ -924,6 +984,8 @@ export type OrganizationUncheckedCreateWithoutConsentRecordsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutConsentRecordsInput = {
@@ -963,6 +1025,8 @@ export type OrganizationUpdateWithoutConsentRecordsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutConsentRecordsInput = {
@@ -986,6 +1050,8 @@ export type OrganizationUncheckedUpdateWithoutConsentRecordsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutMeasurementsInput = {
@@ -1009,6 +1075,8 @@ export type OrganizationCreateWithoutMeasurementsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMeasurementsInput = {
@@ -1032,6 +1100,8 @@ export type OrganizationUncheckedCreateWithoutMeasurementsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMeasurementsInput = {
@@ -1071,6 +1141,8 @@ export type OrganizationUpdateWithoutMeasurementsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMeasurementsInput = {
@@ -1094,6 +1166,8 @@ export type OrganizationUncheckedUpdateWithoutMeasurementsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutExaminationsInput = {
@@ -1117,6 +1191,8 @@ export type OrganizationCreateWithoutExaminationsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutExaminationsInput = {
@@ -1140,6 +1216,8 @@ export type OrganizationUncheckedCreateWithoutExaminationsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutExaminationsInput = {
@@ -1179,6 +1257,8 @@ export type OrganizationUpdateWithoutExaminationsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutExaminationsInput = {
@@ -1202,6 +1282,8 @@ export type OrganizationUncheckedUpdateWithoutExaminationsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEyeImagesInput = {
@@ -1225,6 +1307,8 @@ export type OrganizationCreateWithoutEyeImagesInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEyeImagesInput = {
@@ -1248,6 +1332,8 @@ export type OrganizationUncheckedCreateWithoutEyeImagesInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEyeImagesInput = {
@@ -1287,6 +1373,8 @@ export type OrganizationUpdateWithoutEyeImagesInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEyeImagesInput = {
@@ -1310,6 +1398,8 @@ export type OrganizationUncheckedUpdateWithoutEyeImagesInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutQualityAssessmentsInput = {
@@ -1333,6 +1423,8 @@ export type OrganizationCreateWithoutQualityAssessmentsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutQualityAssessmentsInput = {
@@ -1356,6 +1448,8 @@ export type OrganizationUncheckedCreateWithoutQualityAssessmentsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutQualityAssessmentsInput = {
@@ -1395,6 +1489,8 @@ export type OrganizationUpdateWithoutQualityAssessmentsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutQualityAssessmentsInput = {
@@ -1418,6 +1514,8 @@ export type OrganizationUncheckedUpdateWithoutQualityAssessmentsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPredictionsInput = {
@@ -1441,6 +1539,8 @@ export type OrganizationCreateWithoutPredictionsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPredictionsInput = {
@@ -1464,6 +1564,8 @@ export type OrganizationUncheckedCreateWithoutPredictionsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPredictionsInput = {
@@ -1503,6 +1605,8 @@ export type OrganizationUpdateWithoutPredictionsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPredictionsInput = {
@@ -1526,6 +1630,8 @@ export type OrganizationUncheckedUpdateWithoutPredictionsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutReviewsInput = {
@@ -1549,6 +1655,8 @@ export type OrganizationCreateWithoutReviewsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutReviewsInput = {
@@ -1572,6 +1680,8 @@ export type OrganizationUncheckedCreateWithoutReviewsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutReviewsInput = {
@@ -1611,6 +1721,8 @@ export type OrganizationUpdateWithoutReviewsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutReviewsInput = {
@@ -1634,6 +1746,8 @@ export type OrganizationUncheckedUpdateWithoutReviewsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutReferralsInput = {
@@ -1657,6 +1771,8 @@ export type OrganizationCreateWithoutReferralsInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutReferralsInput = {
@@ -1680,6 +1796,8 @@ export type OrganizationUncheckedCreateWithoutReferralsInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutReferralsInput = {
@@ -1719,6 +1837,8 @@ export type OrganizationUpdateWithoutReferralsInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutReferralsInput = {
@@ -1742,6 +1862,8 @@ export type OrganizationUncheckedUpdateWithoutReferralsInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCarePlansInput = {
@@ -1765,6 +1887,8 @@ export type OrganizationCreateWithoutCarePlansInput = {
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCarePlansInput = {
@@ -1788,6 +1912,8 @@ export type OrganizationUncheckedCreateWithoutCarePlansInput = {
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCarePlansInput = {
@@ -1827,6 +1953,8 @@ export type OrganizationUpdateWithoutCarePlansInput = {
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCarePlansInput = {
@@ -1850,6 +1978,8 @@ export type OrganizationUncheckedUpdateWithoutCarePlansInput = {
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutFollowUpsInput = {
@@ -1873,6 +2003,8 @@ export type OrganizationCreateWithoutFollowUpsInput = {
   carePlans?: Prisma.CarePlanCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutFollowUpsInput = {
@@ -1896,6 +2028,8 @@ export type OrganizationUncheckedCreateWithoutFollowUpsInput = {
   carePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutFollowUpsInput = {
@@ -1935,6 +2069,8 @@ export type OrganizationUpdateWithoutFollowUpsInput = {
   carePlans?: Prisma.CarePlanUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutFollowUpsInput = {
@@ -1958,6 +2094,8 @@ export type OrganizationUncheckedUpdateWithoutFollowUpsInput = {
   carePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAppointmentsInput = {
@@ -1981,6 +2119,8 @@ export type OrganizationCreateWithoutAppointmentsInput = {
   carePlans?: Prisma.CarePlanCreateNestedManyWithoutOrganizationInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAppointmentsInput = {
@@ -2004,6 +2144,8 @@ export type OrganizationUncheckedCreateWithoutAppointmentsInput = {
   carePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutOrganizationInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAppointmentsInput = {
@@ -2043,6 +2185,8 @@ export type OrganizationUpdateWithoutAppointmentsInput = {
   carePlans?: Prisma.CarePlanUpdateManyWithoutOrganizationNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAppointmentsInput = {
@@ -2066,6 +2210,240 @@ export type OrganizationUncheckedUpdateWithoutAppointmentsInput = {
   carePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutOrganizationNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEducationReportsInput = {
+  id?: string
+  slug: string
+  name: string
+  status?: $Enums.OrganizationStatus
+  retentionPolicyKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  patients?: Prisma.PatientCreateNestedManyWithoutOrganizationInput
+  consentRecords?: Prisma.ConsentRecordCreateNestedManyWithoutOrganizationInput
+  measurements?: Prisma.ClinicalMeasurementCreateNestedManyWithoutOrganizationInput
+  examinations?: Prisma.ExaminationCreateNestedManyWithoutOrganizationInput
+  eyeImages?: Prisma.EyeImageCreateNestedManyWithoutOrganizationInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentCreateNestedManyWithoutOrganizationInput
+  predictions?: Prisma.PredictionCreateNestedManyWithoutOrganizationInput
+  reviews?: Prisma.ClinicianReviewCreateNestedManyWithoutOrganizationInput
+  referrals?: Prisma.ReferralCreateNestedManyWithoutOrganizationInput
+  carePlans?: Prisma.CarePlanCreateNestedManyWithoutOrganizationInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
+  appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEducationReportsInput = {
+  id?: string
+  slug: string
+  name: string
+  status?: $Enums.OrganizationStatus
+  retentionPolicyKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutOrganizationInput
+  consentRecords?: Prisma.ConsentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  measurements?: Prisma.ClinicalMeasurementUncheckedCreateNestedManyWithoutOrganizationInput
+  examinations?: Prisma.ExaminationUncheckedCreateNestedManyWithoutOrganizationInput
+  eyeImages?: Prisma.EyeImageUncheckedCreateNestedManyWithoutOrganizationInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUncheckedCreateNestedManyWithoutOrganizationInput
+  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutOrganizationInput
+  reviews?: Prisma.ClinicianReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  referrals?: Prisma.ReferralUncheckedCreateNestedManyWithoutOrganizationInput
+  carePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutOrganizationInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
+  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEducationReportsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEducationReportsInput, Prisma.OrganizationUncheckedCreateWithoutEducationReportsInput>
+}
+
+export type OrganizationUpsertWithoutEducationReportsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEducationReportsInput, Prisma.OrganizationUncheckedUpdateWithoutEducationReportsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEducationReportsInput, Prisma.OrganizationUncheckedCreateWithoutEducationReportsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEducationReportsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEducationReportsInput, Prisma.OrganizationUncheckedUpdateWithoutEducationReportsInput>
+}
+
+export type OrganizationUpdateWithoutEducationReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  retentionPolicyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutOrganizationNestedInput
+  consentRecords?: Prisma.ConsentRecordUpdateManyWithoutOrganizationNestedInput
+  measurements?: Prisma.ClinicalMeasurementUpdateManyWithoutOrganizationNestedInput
+  examinations?: Prisma.ExaminationUpdateManyWithoutOrganizationNestedInput
+  eyeImages?: Prisma.EyeImageUpdateManyWithoutOrganizationNestedInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUpdateManyWithoutOrganizationNestedInput
+  predictions?: Prisma.PredictionUpdateManyWithoutOrganizationNestedInput
+  reviews?: Prisma.ClinicianReviewUpdateManyWithoutOrganizationNestedInput
+  referrals?: Prisma.ReferralUpdateManyWithoutOrganizationNestedInput
+  carePlans?: Prisma.CarePlanUpdateManyWithoutOrganizationNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
+  appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEducationReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  retentionPolicyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutOrganizationNestedInput
+  consentRecords?: Prisma.ConsentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  measurements?: Prisma.ClinicalMeasurementUncheckedUpdateManyWithoutOrganizationNestedInput
+  examinations?: Prisma.ExaminationUncheckedUpdateManyWithoutOrganizationNestedInput
+  eyeImages?: Prisma.EyeImageUncheckedUpdateManyWithoutOrganizationNestedInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutOrganizationNestedInput
+  reviews?: Prisma.ClinicianReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  referrals?: Prisma.ReferralUncheckedUpdateManyWithoutOrganizationNestedInput
+  carePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
+  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutReportSharesInput = {
+  id?: string
+  slug: string
+  name: string
+  status?: $Enums.OrganizationStatus
+  retentionPolicyKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  patients?: Prisma.PatientCreateNestedManyWithoutOrganizationInput
+  consentRecords?: Prisma.ConsentRecordCreateNestedManyWithoutOrganizationInput
+  measurements?: Prisma.ClinicalMeasurementCreateNestedManyWithoutOrganizationInput
+  examinations?: Prisma.ExaminationCreateNestedManyWithoutOrganizationInput
+  eyeImages?: Prisma.EyeImageCreateNestedManyWithoutOrganizationInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentCreateNestedManyWithoutOrganizationInput
+  predictions?: Prisma.PredictionCreateNestedManyWithoutOrganizationInput
+  reviews?: Prisma.ClinicianReviewCreateNestedManyWithoutOrganizationInput
+  referrals?: Prisma.ReferralCreateNestedManyWithoutOrganizationInput
+  carePlans?: Prisma.CarePlanCreateNestedManyWithoutOrganizationInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
+  appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutReportSharesInput = {
+  id?: string
+  slug: string
+  name: string
+  status?: $Enums.OrganizationStatus
+  retentionPolicyKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutOrganizationInput
+  consentRecords?: Prisma.ConsentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  measurements?: Prisma.ClinicalMeasurementUncheckedCreateNestedManyWithoutOrganizationInput
+  examinations?: Prisma.ExaminationUncheckedCreateNestedManyWithoutOrganizationInput
+  eyeImages?: Prisma.EyeImageUncheckedCreateNestedManyWithoutOrganizationInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUncheckedCreateNestedManyWithoutOrganizationInput
+  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutOrganizationInput
+  reviews?: Prisma.ClinicianReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  referrals?: Prisma.ReferralUncheckedCreateNestedManyWithoutOrganizationInput
+  carePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutOrganizationInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
+  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutReportSharesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutReportSharesInput, Prisma.OrganizationUncheckedCreateWithoutReportSharesInput>
+}
+
+export type OrganizationUpsertWithoutReportSharesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutReportSharesInput, Prisma.OrganizationUncheckedUpdateWithoutReportSharesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutReportSharesInput, Prisma.OrganizationUncheckedCreateWithoutReportSharesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutReportSharesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutReportSharesInput, Prisma.OrganizationUncheckedUpdateWithoutReportSharesInput>
+}
+
+export type OrganizationUpdateWithoutReportSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  retentionPolicyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutOrganizationNestedInput
+  consentRecords?: Prisma.ConsentRecordUpdateManyWithoutOrganizationNestedInput
+  measurements?: Prisma.ClinicalMeasurementUpdateManyWithoutOrganizationNestedInput
+  examinations?: Prisma.ExaminationUpdateManyWithoutOrganizationNestedInput
+  eyeImages?: Prisma.EyeImageUpdateManyWithoutOrganizationNestedInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUpdateManyWithoutOrganizationNestedInput
+  predictions?: Prisma.PredictionUpdateManyWithoutOrganizationNestedInput
+  reviews?: Prisma.ClinicianReviewUpdateManyWithoutOrganizationNestedInput
+  referrals?: Prisma.ReferralUpdateManyWithoutOrganizationNestedInput
+  carePlans?: Prisma.CarePlanUpdateManyWithoutOrganizationNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
+  appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutReportSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  retentionPolicyKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutOrganizationNestedInput
+  consentRecords?: Prisma.ConsentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  measurements?: Prisma.ClinicalMeasurementUncheckedUpdateManyWithoutOrganizationNestedInput
+  examinations?: Prisma.ExaminationUncheckedUpdateManyWithoutOrganizationNestedInput
+  eyeImages?: Prisma.EyeImageUncheckedUpdateManyWithoutOrganizationNestedInput
+  qualityAssessments?: Prisma.ImageQualityAssessmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutOrganizationNestedInput
+  reviews?: Prisma.ClinicianReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  referrals?: Prisma.ReferralUncheckedUpdateManyWithoutOrganizationNestedInput
+  carePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
+  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEventsInput = {
@@ -2089,6 +2467,8 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   carePlans?: Prisma.CarePlanCreateNestedManyWithoutOrganizationInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
@@ -2112,6 +2492,8 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   carePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutOrganizationInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutOrganizationInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutOrganizationInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutOrganizationInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEventsInput = {
@@ -2151,6 +2533,8 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   carePlans?: Prisma.CarePlanUpdateManyWithoutOrganizationNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
@@ -2174,6 +2558,8 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   carePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutOrganizationNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutOrganizationNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutOrganizationNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -2196,6 +2582,8 @@ export type OrganizationCountOutputType = {
   followUps: number
   appointments: number
   auditEvents: number
+  educationReports: number
+  reportShares: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2213,6 +2601,8 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   followUps?: boolean | OrganizationCountOutputTypeCountFollowUpsArgs
   appointments?: boolean | OrganizationCountOutputTypeCountAppointmentsArgs
   auditEvents?: boolean | OrganizationCountOutputTypeCountAuditEventsArgs
+  educationReports?: boolean | OrganizationCountOutputTypeCountEducationReportsArgs
+  reportShares?: boolean | OrganizationCountOutputTypeCountReportSharesArgs
 }
 
 /**
@@ -2323,6 +2713,20 @@ export type OrganizationCountOutputTypeCountAuditEventsArgs<ExtArgs extends runt
   where?: Prisma.AuditEventWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountEducationReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PatientEducationWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountReportSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportShareWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2346,6 +2750,8 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   followUps?: boolean | Prisma.Organization$followUpsArgs<ExtArgs>
   appointments?: boolean | Prisma.Organization$appointmentsArgs<ExtArgs>
   auditEvents?: boolean | Prisma.Organization$auditEventsArgs<ExtArgs>
+  educationReports?: boolean | Prisma.Organization$educationReportsArgs<ExtArgs>
+  reportShares?: boolean | Prisma.Organization$reportSharesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -2395,6 +2801,8 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   followUps?: boolean | Prisma.Organization$followUpsArgs<ExtArgs>
   appointments?: boolean | Prisma.Organization$appointmentsArgs<ExtArgs>
   auditEvents?: boolean | Prisma.Organization$auditEventsArgs<ExtArgs>
+  educationReports?: boolean | Prisma.Organization$educationReportsArgs<ExtArgs>
+  reportShares?: boolean | Prisma.Organization$reportSharesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2417,6 +2825,8 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
     appointments: Prisma.$AppointmentPayload<ExtArgs>[]
     auditEvents: Prisma.$AuditEventPayload<ExtArgs>[]
+    educationReports: Prisma.$PatientEducationPayload<ExtArgs>[]
+    reportShares: Prisma.$ReportSharePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2834,6 +3244,8 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   followUps<T extends Prisma.Organization$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   appointments<T extends Prisma.Organization$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditEvents<T extends Prisma.Organization$auditEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$auditEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  educationReports<T extends Prisma.Organization$educationReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$educationReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PatientEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reportShares<T extends Prisma.Organization$reportSharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$reportSharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3596,6 +4008,54 @@ export type Organization$auditEventsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.AuditEventScalarFieldEnum | Prisma.AuditEventScalarFieldEnum[]
+}
+
+/**
+ * Organization.educationReports
+ */
+export type Organization$educationReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PatientEducation
+   */
+  select?: Prisma.PatientEducationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PatientEducation
+   */
+  omit?: Prisma.PatientEducationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PatientEducationInclude<ExtArgs> | null
+  where?: Prisma.PatientEducationWhereInput
+  orderBy?: Prisma.PatientEducationOrderByWithRelationInput | Prisma.PatientEducationOrderByWithRelationInput[]
+  cursor?: Prisma.PatientEducationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PatientEducationScalarFieldEnum | Prisma.PatientEducationScalarFieldEnum[]
+}
+
+/**
+ * Organization.reportShares
+ */
+export type Organization$reportSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportShare
+   */
+  select?: Prisma.ReportShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportShare
+   */
+  omit?: Prisma.ReportShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportShareInclude<ExtArgs> | null
+  where?: Prisma.ReportShareWhereInput
+  orderBy?: Prisma.ReportShareOrderByWithRelationInput | Prisma.ReportShareOrderByWithRelationInput[]
+  cursor?: Prisma.ReportShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportShareScalarFieldEnum | Prisma.ReportShareScalarFieldEnum[]
 }
 
 /**

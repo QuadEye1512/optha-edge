@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { UserStatus } from '@/generated/prisma/client';
 import { getPrisma } from '@/lib/db/prisma';
@@ -63,16 +64,26 @@ export const getCurrentActor = cache(async (): Promise<AuthorizationActor | null
   };
 });
 
+/** For pages: redirects to sign-in when there is no active session. */
+export async function requireActor(): Promise<AuthorizationActor> {
+  const actor = await getCurrentActor();
+  if (!actor) {
+    redirect('/sign-in');
+  }
+  return actor;
+}
+
 export interface ViewerDTO {
   displayName: string;
   roleNames: readonly string[];
+  permissions: readonly string[];
 }
 
 export async function getViewerDTO(): Promise<ViewerDTO | null> {
   try {
     const actor = await getCurrentActor();
     return actor
-      ? { displayName: actor.displayName, roleNames: actor.roleNames }
+      ? { displayName: actor.displayName, roleNames: actor.roleNames, permissions: [...actor.permissions] }
       : null;
   } catch {
     return null;

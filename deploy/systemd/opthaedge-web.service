@@ -1,0 +1,19 @@
+[Unit]
+Description=OpthaEdge web platform (Next.js)
+After=network.target postgresql.service opthaedge-inference.service
+Wants=postgresql.service
+
+[Service]
+User=__APP_USER__
+Group=__APP_USER__
+WorkingDirectory=__APP_DIR__
+EnvironmentFile=/etc/opthaedge/opthaedge.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npx next start -H 0.0.0.0 -p 3000
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

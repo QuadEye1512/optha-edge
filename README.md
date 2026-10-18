@@ -1,103 +1,123 @@
 # OpthaEdge
 
-OpthaEdge is a research-stage retinal screening and eye-care record platform built with Next.js 16, React 19, TypeScript, Prisma ORM, PostgreSQL, ONNX Runtime, and Sharp.
+Edge-AI screening for diabetic retinopathy. A retinal image is captured through a
+20D lens, graded on a **Raspberry Pi 4** by the distilled student model
+(MobileNetV3-Large + LiteCBAM, ONNX), and reviewed on a **mobile phone** in a
+web platform that keeps each patient's full eye-care record, writes patient
+education with **Claude** (disease explanation, diet, natural remedies and how
+to take them), and shares the confirmed result to the patient's phone.
 
-The included DR models are available for research workflow testing only. Their clinical validation packages have not been supplied, so the application must not be represented as an autonomous diagnostic system.
+> Research use only. The model is not a medical device. Every AI grade must be
+> confirmed or overridden by a clinician before it is final or shared.
 
-## Requirements
+## How it works
 
-- Node.js 20.19+, 22.12+, or 24+ (Prisma ORM requirement)
-- PostgreSQL 15 or newer
-- npm
+```text
+ Phone (PWA, Wi-Fi)                    Raspberry Pi 4
+ ┌───────────────────┐    HTTPS/HTTP   ┌───────────────────────────────────────────────┐
+ │ OpthaEdge web app │ ──────────────▶ │ Next.js platform :3000                        │
+ │  • patients       │                 │  auth, roles, consent, audit, encrypted images │
+ │  • capture/upload │                 │  PostgreSQL (patient records)                  │
+ │  • review & sign  │                 │        │ localhost + shared key                │
+ │  • education      │                 │        ▼                                       │
+ │  • share to       │                 │ FastAPI inference :8001  (edge/server.py)      │
+ │    patient phone  │                 │  quality gate → pi_infer preprocessing →       │
+ └───────────────────┘                 │  student_int8/fp32.onnx → 5 grades             │
+          ▲                            │  Pi camera + 20D lens (picamera2)              │
+          │ share link / QR            └───────────────────────────────────────────────┘
+ Patient's phone                                │ (optional, internet)
+                                                ▼
+                                       Claude API — patient education
+```
 
-## Application setup
+1. **Register** the patient, record consent, diabetes history, HbA1c/BP, medicines and allergies.
+2. **Capture**: tap *Capture & analyse* to shoot through the 20D lens on the Pi camera (with a live
+   alignment view), or take/upload a photo from the phone.
+3. **Edge AI**: the Pi checks sharpness/brightness, then runs the exact training preprocessing
+   (`pi_infer.py`: Gaussian-difference denoise, Otsu ROI crop, 384→224) and the student model.
+4. **Review**: a clinician sees the original image, the 224 px model input, all five probabilities,
+   any-DR and referable probabilities, then agrees or overrides, sets referral and follow-up, and signs.
+5. **Educate & share**: Claude writes personalised education in the patient's language, checked
+   against their medicines (e.g. fenugreek + sulfonylureas, fish oil + anticoagulants). A 14-day
+   link/QR code or WhatsApp message lets the patient open it on their own phone.
+
+## Features
+
+| Area | What it does |
+|---|---|
+| Patients | Search (name, ID, mobile), registration, versioned medical history, vitals & labs with HbA1c trend, medicines, allergies, eye history, notes, consent per purpose, archive |
+| Screening | Pi camera capture with live MJPEG preview, phone camera/upload, consent gate, quality gate with recapture guidance |
+| Records | Immutable examinations: encrypted original + model-input images (AES-256-GCM), quality metrics, model version + artifact SHA-256 + preprocessing version, probabilities |
+| Review | Review queue (referable first), agree / override / repeat imaging / indeterminate, referral, follow-up, signed & locked reviews with amendments |
+| Care | Follow-up list (upcoming / overdue / closed) with call buttons, referrals |
+| Education | Claude-generated structured education (structured outputs, refusal fallback); curated evidence-graded fallback offline |
+| Sharing | Token links (hashed, expiring, revocable, view-counted), QR code, WhatsApp/SMS |
+| Reports | Grade distribution, referable patients, ungradable rate, AI–clinician agreement, Pi latency, CSV export, printable per-exam report |
+| Admin | Users and roles (Administrator, Clinician, Screening Technician), password reset, suspend, device status, audit trail |
+| Mobile | Installable PWA, bottom tab bar, works over the clinic Wi-Fi or a Pi hotspot |
+
+## Repository layout
+
+```text
+app/                Next.js routes (pages, server actions, API routes)
+components/         UI components
+data/               server-only data access (all authorization + audit here)
+lib/                auth, edge client + response validation, encryption, DR grades,
+                    education (Claude + curated), model registry
+edge/               Raspberry Pi inference service
+  pi_infer.py       preprocessing + session code generated by the training notebook (unchanged)
+  server.py         FastAPI service: /health /predict /capture /preview.mjpg
+  test_parity.py    guide §7 parity check (CLI vs API)
+  models/           student_fp32.onnx, student_int8.onnx
+deploy/             install_pi.sh and systemd units
+prisma/             schema, migrations, seed
+docs/DEPLOYMENT.md  full Raspberry Pi deployment guide
+```
+
+## Local development
+
+Requirements: Node.js 22+, Python 3.10+, PostgreSQL 15+ (or Docker).
 
 ```bash
 npm install
-npm run dev
+cp .env.example .env                     # set DATABASE_URL, SESSION_SECRET, IMAGE_ENCRYPTION_KEY, INFERENCE_API_KEY
+npx prisma migrate deploy
+SEED_DEMO_DATA=true SEED_ADMIN_EMAIL=you@example.com SEED_ADMIN_PASSWORD='ChangeMe2026' npm run db:seed
+
+# inference service (another terminal)
+cd edge && pip install -r requirements.txt
+INFERENCE_API_KEY=<same as .env> CAMERA=off uvicorn server:app --port 8001
+
+npm run dev                              # http://localhost:3000
 ```
 
-Open http://localhost:3000.
-
-## Prisma and PostgreSQL setup
-
-1. Create a PostgreSQL database and database user for OpthaEdge.
-2. Copy `.env.example` to `.env`.
-3. Replace the placeholder password and connection details in `DATABASE_URL`.
-4. Validate and generate the Prisma client:
-
-```bash
-npm run db:validate
-npm run db:generate
-```
-
-5. Create and apply the initial development migration:
-
-```bash
-npm run db:migrate -- --name initial_clinical_schema
-```
-
-6. Seed synthetic development data only:
-
-```bash
-npm run db:seed
-```
-
-7. Optionally inspect the database:
-
-```bash
-npm run db:studio
-```
-
-## Local authentication and patient records
-
-The development workspace supports a signed, HTTP-only synthetic session that is
-disabled automatically in production. Configure a unique `SESSION_SECRET` of at
-least 32 characters, then set these values only in `.env.development.local`:
-
-```env
-ENABLE_SYNTHETIC_AUTH="true"
-SYNTHETIC_AUTH_SUBJECT="synthetic|clinician-reviewer"
-```
-
-Run the synthetic seed before signing in. Open `/sign-in`, enter the synthetic
-clinician workspace, and use `/patients` to search or create synthetic records.
-Patient queries derive their organization from the verified server session, and
-patient creation writes its audit event in the same database transaction.
-
-Production deployment still requires an approved OIDC identity provider with
-MFA/session-revocation support. The synthetic provider cannot run in production.
-
-The seed is explicit and is never run automatically. It creates only clearly labeled synthetic records and keeps both model versions in `BLOCKED_PENDING_VALIDATION` status.
-
-## Database structure
-
-The initial normalized Prisma schema includes:
-
-- Organizations, users, roles, permissions, and memberships.
-- Patients, identifiers, demographics, contacts, consent, history, risk factors, measurements, medication, allergies, documents, and notes.
-- Laterality-aware examinations, immutable image references, image-quality assessments, model versions, predictions, probabilities, lesion findings, and explainability assets.
-- Deferred review and care-journey tables retained for migration safety; no Review Queue or Follow-up routes, permissions, or data services are active.
-- Versioned educational content, medical sources, medical reviews, and audit events.
-
-Database access belongs in server-only data-access modules. UI components must receive minimal DTOs rather than raw Prisma records.
+Add `ANTHROPIC_API_KEY` to enable AI-written education (default model `claude-opus-5-5`,
+override with `LLM_MODEL`). Without it the platform uses the curated guidance.
 
 ## Verification
 
 ```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
+npm run lint && npm run typecheck && npm test && npm run build
+cd edge && python test_parity.py samples/     # put one real fundus image per grade in samples/
 ```
 
-The production build regenerates Prisma Client before compiling Next.js.
+## Raspberry Pi deployment
 
-## Important limitations
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). In short, on a Pi 4 (4 GB+) with 64-bit Raspberry Pi OS:
 
-- Authentication and role verification are not configured yet.
-- A `DATABASE_URL` alone does not activate patient modules; migrations, authentication, resource authorization, storage, and audit workflows must also be completed.
-- Retinal images require private encrypted object storage. They should not be placed directly in PostgreSQL or browser storage.
-- No automated image-quality model is supplied.
-- No additional ocular disease model is supplied or activated.
-- Do not claim regulatory compliance without formal legal, privacy, security, and operational assessment.
+```bash
+git clone <this repo> ~/opthaedge && cd ~/opthaedge
+sudo ./deploy/install_pi.sh
+```
+
+## Safety and limitations
+
+- Validation: APTOS 2019 split only (FP32 accuracy 0.8145, QWK 0.9033; INT8 0.7844 / 0.8900); no
+  separate test set; weaker on severe/proliferative DR; **not yet validated on 20D-lens Pi images**.
+  Use the AI–clinician agreement report to collect that evidence.
+- The quality-gate thresholds are starting values; calibrate them on your own Pi images.
+- The model does not assess macular edema, glaucoma, cataract or other disease.
+- Natural remedies are presented as complementary, evidence-graded and food-based; education never
+  advises stopping treatment and always lists red-flag symptoms.
+- No regulatory compliance is claimed. Before real patient use: HTTPS, backups of the database and
+  `IMAGE_ENCRYPTION_KEY`, clinical sign-off of educational content, and an institutional review.

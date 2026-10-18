@@ -42,6 +42,7 @@ export type EyeImageMinAggregateOutputType = {
   examinationId: string | null
   eye: $Enums.Laterality | null
   storageKey: string | null
+  modelInputStorageKey: string | null
   sha256: string | null
   mimeType: string | null
   width: number | null
@@ -56,6 +57,7 @@ export type EyeImageMaxAggregateOutputType = {
   examinationId: string | null
   eye: $Enums.Laterality | null
   storageKey: string | null
+  modelInputStorageKey: string | null
   sha256: string | null
   mimeType: string | null
   width: number | null
@@ -70,6 +72,7 @@ export type EyeImageCountAggregateOutputType = {
   examinationId: number
   eye: number
   storageKey: number
+  modelInputStorageKey: number
   sha256: number
   mimeType: number
   width: number
@@ -96,6 +99,7 @@ export type EyeImageMinAggregateInputType = {
   examinationId?: true
   eye?: true
   storageKey?: true
+  modelInputStorageKey?: true
   sha256?: true
   mimeType?: true
   width?: true
@@ -110,6 +114,7 @@ export type EyeImageMaxAggregateInputType = {
   examinationId?: true
   eye?: true
   storageKey?: true
+  modelInputStorageKey?: true
   sha256?: true
   mimeType?: true
   width?: true
@@ -124,6 +129,7 @@ export type EyeImageCountAggregateInputType = {
   examinationId?: true
   eye?: true
   storageKey?: true
+  modelInputStorageKey?: true
   sha256?: true
   mimeType?: true
   width?: true
@@ -225,6 +231,7 @@ export type EyeImageGroupByOutputType = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey: string | null
   sha256: string
   mimeType: string
   width: number
@@ -262,6 +269,7 @@ export type EyeImageWhereInput = {
   examinationId?: Prisma.StringFilter<"EyeImage"> | string
   eye?: Prisma.EnumLateralityFilter<"EyeImage"> | $Enums.Laterality
   storageKey?: Prisma.StringFilter<"EyeImage"> | string
+  modelInputStorageKey?: Prisma.StringNullableFilter<"EyeImage"> | string | null
   sha256?: Prisma.StringFilter<"EyeImage"> | string
   mimeType?: Prisma.StringFilter<"EyeImage"> | string
   width?: Prisma.IntFilter<"EyeImage"> | number
@@ -280,6 +288,7 @@ export type EyeImageOrderByWithRelationInput = {
   examinationId?: Prisma.SortOrder
   eye?: Prisma.SortOrder
   storageKey?: Prisma.SortOrder
+  modelInputStorageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   sha256?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   width?: Prisma.SortOrder
@@ -302,6 +311,7 @@ export type EyeImageWhereUniqueInput = Prisma.AtLeast<{
   examinationId?: Prisma.StringFilter<"EyeImage"> | string
   eye?: Prisma.EnumLateralityFilter<"EyeImage"> | $Enums.Laterality
   storageKey?: Prisma.StringFilter<"EyeImage"> | string
+  modelInputStorageKey?: Prisma.StringNullableFilter<"EyeImage"> | string | null
   sha256?: Prisma.StringFilter<"EyeImage"> | string
   mimeType?: Prisma.StringFilter<"EyeImage"> | string
   width?: Prisma.IntFilter<"EyeImage"> | number
@@ -320,6 +330,7 @@ export type EyeImageOrderByWithAggregationInput = {
   examinationId?: Prisma.SortOrder
   eye?: Prisma.SortOrder
   storageKey?: Prisma.SortOrder
+  modelInputStorageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   sha256?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   width?: Prisma.SortOrder
@@ -342,6 +353,7 @@ export type EyeImageScalarWhereWithAggregatesInput = {
   examinationId?: Prisma.StringWithAggregatesFilter<"EyeImage"> | string
   eye?: Prisma.EnumLateralityWithAggregatesFilter<"EyeImage"> | $Enums.Laterality
   storageKey?: Prisma.StringWithAggregatesFilter<"EyeImage"> | string
+  modelInputStorageKey?: Prisma.StringNullableWithAggregatesFilter<"EyeImage"> | string | null
   sha256?: Prisma.StringWithAggregatesFilter<"EyeImage"> | string
   mimeType?: Prisma.StringWithAggregatesFilter<"EyeImage"> | string
   width?: Prisma.IntWithAggregatesFilter<"EyeImage"> | number
@@ -354,6 +366,7 @@ export type EyeImageCreateInput = {
   id?: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -372,6 +385,7 @@ export type EyeImageUncheckedCreateInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -386,6 +400,7 @@ export type EyeImageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -404,6 +419,7 @@ export type EyeImageUncheckedUpdateInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -420,6 +436,7 @@ export type EyeImageCreateManyInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -432,6 +449,7 @@ export type EyeImageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -446,6 +464,7 @@ export type EyeImageUncheckedUpdateManyInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -475,6 +494,7 @@ export type EyeImageCountOrderByAggregateInput = {
   examinationId?: Prisma.SortOrder
   eye?: Prisma.SortOrder
   storageKey?: Prisma.SortOrder
+  modelInputStorageKey?: Prisma.SortOrder
   sha256?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   width?: Prisma.SortOrder
@@ -494,6 +514,7 @@ export type EyeImageMaxOrderByAggregateInput = {
   examinationId?: Prisma.SortOrder
   eye?: Prisma.SortOrder
   storageKey?: Prisma.SortOrder
+  modelInputStorageKey?: Prisma.SortOrder
   sha256?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   width?: Prisma.SortOrder
@@ -508,6 +529,7 @@ export type EyeImageMinOrderByAggregateInput = {
   examinationId?: Prisma.SortOrder
   eye?: Prisma.SortOrder
   storageKey?: Prisma.SortOrder
+  modelInputStorageKey?: Prisma.SortOrder
   sha256?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   width?: Prisma.SortOrder
@@ -650,6 +672,7 @@ export type EyeImageCreateWithoutOrganizationInput = {
   id?: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -666,6 +689,7 @@ export type EyeImageUncheckedCreateWithoutOrganizationInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -711,6 +735,7 @@ export type EyeImageScalarWhereInput = {
   examinationId?: Prisma.StringFilter<"EyeImage"> | string
   eye?: Prisma.EnumLateralityFilter<"EyeImage"> | $Enums.Laterality
   storageKey?: Prisma.StringFilter<"EyeImage"> | string
+  modelInputStorageKey?: Prisma.StringNullableFilter<"EyeImage"> | string | null
   sha256?: Prisma.StringFilter<"EyeImage"> | string
   mimeType?: Prisma.StringFilter<"EyeImage"> | string
   width?: Prisma.IntFilter<"EyeImage"> | number
@@ -723,6 +748,7 @@ export type EyeImageCreateWithoutExaminationInput = {
   id?: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -739,6 +765,7 @@ export type EyeImageUncheckedCreateWithoutExaminationInput = {
   organizationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -779,6 +806,7 @@ export type EyeImageCreateWithoutQualityAssessmentsInput = {
   id?: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -796,6 +824,7 @@ export type EyeImageUncheckedCreateWithoutQualityAssessmentsInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -825,6 +854,7 @@ export type EyeImageUpdateWithoutQualityAssessmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -842,6 +872,7 @@ export type EyeImageUncheckedUpdateWithoutQualityAssessmentsInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -855,6 +886,7 @@ export type EyeImageCreateWithoutPredictionsInput = {
   id?: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -872,6 +904,7 @@ export type EyeImageUncheckedCreateWithoutPredictionsInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -901,6 +934,7 @@ export type EyeImageUpdateWithoutPredictionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -918,6 +952,7 @@ export type EyeImageUncheckedUpdateWithoutPredictionsInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -932,6 +967,7 @@ export type EyeImageCreateManyOrganizationInput = {
   examinationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -944,6 +980,7 @@ export type EyeImageUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -960,6 +997,7 @@ export type EyeImageUncheckedUpdateWithoutOrganizationInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -975,6 +1013,7 @@ export type EyeImageUncheckedUpdateManyWithoutOrganizationInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -988,6 +1027,7 @@ export type EyeImageCreateManyExaminationInput = {
   organizationId: string
   eye: $Enums.Laterality
   storageKey: string
+  modelInputStorageKey?: string | null
   sha256: string
   mimeType: string
   width: number
@@ -1000,6 +1040,7 @@ export type EyeImageUpdateWithoutExaminationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1016,6 +1057,7 @@ export type EyeImageUncheckedUpdateWithoutExaminationInput = {
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1031,6 +1073,7 @@ export type EyeImageUncheckedUpdateManyWithoutExaminationInput = {
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   eye?: Prisma.EnumLateralityFieldUpdateOperationsInput | $Enums.Laterality
   storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  modelInputStorageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sha256?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1085,6 +1128,7 @@ export type EyeImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   examinationId?: boolean
   eye?: boolean
   storageKey?: boolean
+  modelInputStorageKey?: boolean
   sha256?: boolean
   mimeType?: boolean
   width?: boolean
@@ -1104,6 +1148,7 @@ export type EyeImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   examinationId?: boolean
   eye?: boolean
   storageKey?: boolean
+  modelInputStorageKey?: boolean
   sha256?: boolean
   mimeType?: boolean
   width?: boolean
@@ -1120,6 +1165,7 @@ export type EyeImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   examinationId?: boolean
   eye?: boolean
   storageKey?: boolean
+  modelInputStorageKey?: boolean
   sha256?: boolean
   mimeType?: boolean
   width?: boolean
@@ -1136,6 +1182,7 @@ export type EyeImageSelectScalar = {
   examinationId?: boolean
   eye?: boolean
   storageKey?: boolean
+  modelInputStorageKey?: boolean
   sha256?: boolean
   mimeType?: boolean
   width?: boolean
@@ -1144,7 +1191,7 @@ export type EyeImageSelectScalar = {
   createdAt?: boolean
 }
 
-export type EyeImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "examinationId" | "eye" | "storageKey" | "sha256" | "mimeType" | "width" | "height" | "capturedAt" | "createdAt", ExtArgs["result"]["eyeImage"]>
+export type EyeImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "examinationId" | "eye" | "storageKey" | "modelInputStorageKey" | "sha256" | "mimeType" | "width" | "height" | "capturedAt" | "createdAt", ExtArgs["result"]["eyeImage"]>
 export type EyeImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   examination?: boolean | Prisma.ExaminationDefaultArgs<ExtArgs>
@@ -1175,6 +1222,10 @@ export type $EyeImagePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     examinationId: string
     eye: $Enums.Laterality
     storageKey: string
+    /**
+     * Encrypted copy of the exact 224x224 image the model received.
+     */
+    modelInputStorageKey: string | null
     sha256: string
     mimeType: string
     width: number
@@ -1613,6 +1664,7 @@ export interface EyeImageFieldRefs {
   readonly examinationId: Prisma.FieldRef<"EyeImage", 'String'>
   readonly eye: Prisma.FieldRef<"EyeImage", 'Laterality'>
   readonly storageKey: Prisma.FieldRef<"EyeImage", 'String'>
+  readonly modelInputStorageKey: Prisma.FieldRef<"EyeImage", 'String'>
   readonly sha256: Prisma.FieldRef<"EyeImage", 'String'>
   readonly mimeType: Prisma.FieldRef<"EyeImage", 'String'>
   readonly width: Prisma.FieldRef<"EyeImage", 'Int'>

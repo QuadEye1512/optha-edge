@@ -1,0 +1,9 @@
+onnxruntime>=1.17
+numpy
+opencv-python-headless
+fastapi
+uvicorn[standard]
+python-multipart
+# picamera2 comes from apt (python3-picamera2); create the venv with --system-site-packages.
+# httpx is only needed to run test_parity.py
+httpx
