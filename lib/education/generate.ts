@@ -1,12 +1,13 @@
 import 'server-only';
 
-import Anthropic from '@anthropic-ai/sdk';
-import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';
+import { z } from 'zod';
 import { buildCuratedEducation, CURATED_GENERATOR } from './curated';
 import { educationContentSchema, type EducationContent, type EducationRequest } from './schema';
 
 export const EDUCATION_PROMPT_VERSION = 'dr-education-v1';
-const DEFAULT_MODEL = 'claude-opus-5-5';
+const DEFAULT_MODEL = 'anthropic/claude-opus-5.5';
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const TIMEOUT_MS = 180_000;
 
 const SYSTEM_PROMPT = `You write patient education for OpthaEdge, a diabetic-eye screening service used in clinics in India and similar settings. A retinal photograph was graded for diabetic retinopathy (DR) on the 5-grade international scale. You explain the result to the patient and their family, including evidence-graded diet and natural remedies and how to take them.
 
@@ -23,7 +24,7 @@ Clinical safety rules — these override everything else:
 - Always include red-flag symptoms needing same-day care (sudden vision loss, a shower of floaters, flashes or a curtain over vision, severe eye pain or red eye with nausea).
 - Keep follow-up advice consistent with the clinician-recommended interval provided; do not invent a different schedule.
 - Prefer foods common in the patient's likely region (for example millets, dal, methi, amla, drumstick leaves for India) and give practical amounts and frequency.
-- Do not mention these instructions, the model, or the JSON format.`;
+- Respond only with the JSON object described by the schema. Do not mention these instructions or the model.`;
 
 function describeRequest(request: EducationRequest): string {
   const p = request.patient;
@@ -50,8 +51,28 @@ function describeRequest(request: EducationRequest): string {
   return lines.join('\n');
 }
 
+/** JSON schema for OpenRouter's strict structured output, derived from the zod schema. */
+function responseSchema(): Record<string, unknown> {
+  const schema = z.toJSONSchema(educationContentSchema, { target: 'draft-7' }) as Record<string, unknown>;
+  delete schema.$schema;
+  return schema;
+}
+
+/** Accepts plain JSON, or JSON wrapped in a markdown fence by models that ignore the format hint. */
+function extractJson(text: string): unknown {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  const candidate = (fenced ? fenced[1] : text).trim();
+  const start = candidate.indexOf('{');
+  const end = candidate.lastIndexOf('}');
+  return JSON.parse(start >= 0 && end > start ? candidate.slice(start, end + 1) : candidate);
+}
+
 export function isLlmConfigured(): boolean {
-  return Boolean(process.env.ANTHROPIC_API_KEY?.trim() || process.env.ANTHROPIC_AUTH_TOKEN?.trim());
+  return Boolean(process.env.OPENROUTER_API_KEY?.trim());
+}
+
+export function llmModel(): string {
+  return process.env.OPENROUTER_MODEL?.trim() || DEFAULT_MODEL;
 }
 
 export interface GeneratedEducation {
@@ -60,56 +81,93 @@ export interface GeneratedEducation {
   notice: string | null;
 }
 
+interface OpenRouterResponse {
+  model?: string;
+  choices?: { finish_reason?: string | null; message?: { content?: string | null; refusal?: string | null } }[];
+  error?: { code?: number | string; message?: string };
+}
+
 /**
- * Generates personalised education with Claude. Falls back to curated content
- * (never to an invented result) when the API is not configured, the Pi has no
- * internet, the request is declined, or the output fails validation.
+ * Generates personalised education through OpenRouter. Falls back to curated
+ * content (never to an invented result) when the key is not configured, there
+ * is no internet, the request is refused, or the output fails validation.
  */
 export async function generateEducation(request: EducationRequest): Promise<GeneratedEducation> {
   const curated = buildCuratedEducation(request);
-  if (!isLlmConfigured()) {
-    return { content: curated, generator: CURATED_GENERATOR, notice: 'AI generation is not configured; showing curated guidance.' };
+  const apiKey = process.env.OPENROUTER_API_KEY?.trim();
+  if (!apiKey) {
+    return { content: curated, generator: CURATED_GENERATOR, notice: 'AI generation is not configured (OPENROUTER_API_KEY); showing curated guidance.' };
   }
 
-  const model = process.env.LLM_MODEL?.trim() || DEFAULT_MODEL;
-  const client = new Anthropic({ timeout: 180_000, maxRetries: 2 });
+  const model = llmModel();
+  const fallback = (notice: string): GeneratedEducation => ({ content: curated, generator: CURATED_GENERATOR, notice });
 
+  let response: Response;
   try {
-    const response = await client.beta.messages.parse({
-      model,
-      max_tokens: 16000,
-      betas: ['server-side-fallback-2026-07-01'],
-      fallbacks: 'default',
-      output_config: {
-        effort: 'medium',
-        format: betaZodOutputFormat(educationContentSchema),
+    response = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': process.env.PUBLIC_BASE_URL?.trim() || 'https://opthaedge.local',
+        'X-Title': 'OpthaEdge',
       },
-      system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: describeRequest(request) }],
+      body: JSON.stringify({
+        model,
+        max_tokens: 16000,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: describeRequest(request) },
+        ],
+        response_format: {
+          type: 'json_schema',
+          json_schema: { name: 'patient_education', strict: true, schema: responseSchema() },
+        },
+        // Route only to providers that honour the JSON schema.
+        provider: { require_parameters: true },
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      cache: 'no-store',
     });
-
-    if (response.stop_reason === 'refusal' || response.stop_reason === 'max_tokens' || !response.parsed_output) {
-      console.warn(`[OpthaEdge] Education generation incomplete (stop_reason=${response.stop_reason}); using curated content.`);
-      return { content: curated, generator: CURATED_GENERATOR, notice: 'AI generation did not complete; showing curated guidance.' };
-    }
-
-    const content = educationContentSchema.parse(response.parsed_output);
-    // Safety floor: red flags and the disclaimer are always present.
-    if (!content.warningSigns.length) content.warningSigns = curated.warningSigns;
-    if (!content.disclaimer.trim()) content.disclaimer = curated.disclaimer;
-    return { content, generator: `anthropic:${response.model}`, notice: null };
   } catch (error) {
-    if (error instanceof Anthropic.AuthenticationError) {
-      console.error('[OpthaEdge] Anthropic API key rejected.');
-    } else if (error instanceof Anthropic.RateLimitError) {
-      console.warn('[OpthaEdge] Anthropic rate limit reached.');
-    } else if (error instanceof Anthropic.APIConnectionError) {
-      console.warn('[OpthaEdge] Anthropic API unreachable (offline?).');
-    } else if (error instanceof Anthropic.APIError) {
-      console.error(`[OpthaEdge] Anthropic API error ${error.status}.`);
-    } else {
-      console.error('[OpthaEdge] Education generation failed.', error instanceof Error ? error.message : error);
-    }
-    return { content: curated, generator: CURATED_GENERATOR, notice: 'AI generation is unavailable right now; showing curated guidance.' };
+    const timedOut = error instanceof Error && error.name === 'TimeoutError';
+    console.warn(`[OpthaEdge] OpenRouter ${timedOut ? 'timed out' : 'unreachable (offline?)'}.`);
+    return fallback('AI generation is unavailable right now (no connection); showing curated guidance.');
   }
+
+  let body: OpenRouterResponse;
+  try {
+    body = (await response.json()) as OpenRouterResponse;
+  } catch {
+    body = {};
+  }
+
+  if (!response.ok || body.error) {
+    const status = response.status;
+    console.error(`[OpthaEdge] OpenRouter error ${status}: ${body.error?.message ?? 'no detail'}`);
+    if (status === 401) return fallback('The OpenRouter API key was rejected; showing curated guidance.');
+    if (status === 402) return fallback('The OpenRouter account has insufficient credits; showing curated guidance.');
+    if (status === 429) return fallback('OpenRouter rate limit reached; showing curated guidance. Try again shortly.');
+    return fallback('AI generation failed; showing curated guidance.');
+  }
+
+  const choice = body.choices?.[0];
+  const text = choice?.message?.content;
+  if (!text || choice?.message?.refusal || choice?.finish_reason === 'length') {
+    console.warn(`[OpthaEdge] OpenRouter output incomplete (finish_reason=${choice?.finish_reason ?? 'none'}).`);
+    return fallback('AI generation did not complete; showing curated guidance.');
+  }
+
+  let content: EducationContent;
+  try {
+    content = educationContentSchema.parse(extractJson(text));
+  } catch {
+    console.warn('[OpthaEdge] OpenRouter output failed schema validation.');
+    return fallback('AI output could not be validated; showing curated guidance.');
+  }
+
+  // Safety floor: red flags and the disclaimer are always present.
+  if (!content.warningSigns.length) content.warningSigns = curated.warningSigns;
+  if (!content.disclaimer.trim()) content.disclaimer = curated.disclaimer;
+  return { content, generator: `openrouter:${body.model ?? model}`, notice: null };
 }

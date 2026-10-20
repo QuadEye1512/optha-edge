@@ -36,7 +36,7 @@ The script:
 Enable AI education by adding your key and restarting:
 
 ```bash
-sudo nano /etc/opthaedge/opthaedge.env      # ANTHROPIC_API_KEY="sk-ant-..."
+sudo nano /etc/opthaedge/opthaedge.env      # OPENROUTER_API_KEY="sk-or-v1-..."
 sudo systemctl restart opthaedge-web
 ```
 
@@ -149,5 +149,5 @@ and the Model Information page shows which artifact is active.
 | Sign-in does nothing on the phone | Plain HTTP with `SESSION_COOKIE_SECURE="true"`; set it to `false` or add HTTPS |
 | Odd or identical grades | Preprocessing differs from training; images must go through `pi_infer.preprocess_array` only (the service does this) |
 | Every image ungradable | Lower `BLUR_MIN` after calibration (section 5) |
-| Education shows *curated guidance* | `ANTHROPIC_API_KEY` missing or no internet; screening is unaffected |
+| Education shows *curated guidance* | `OPENROUTER_API_KEY` missing, out of credits, or no internet; screening is unaffected |
 | Build runs out of memory | Use a 4 GB+ Pi, or build on a laptop (`npm run build`) and copy `.next/` to the Pi |

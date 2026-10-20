@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ScreeningWorkspace from '@/components/screening/ScreeningWorkspace';
 import { Badge, Card, EmptyState, Notice, Page, PageHeader, primaryButton, ResearchBanner, secondaryButton } from '@/components/ui';
 import { getPatientSummary, listPatients } from '@/data/patients';
-import { getEdgeHealth } from '@/lib/edge/client';
+import { getInferenceHealth } from '@/lib/edge/client';
 import { requireActor } from '@/lib/auth/authorization';
 import { PERMISSIONS } from '@/lib/auth/permissions';
 import { hasPermission } from '@/lib/auth/policy';
@@ -54,7 +54,7 @@ export default async function ScreeningPage({ searchParams }: { searchParams: Pr
     );
   }
 
-  const [patient, edge] = await Promise.all([getPatientSummary(actor, patientId), getEdgeHealth()]);
+  const [patient, inference] = await Promise.all([getPatientSummary(actor, patientId), getInferenceHealth()]);
   if (!patient) {
     return <Page><Notice tone="rose">Patient not found or archived. <Link href="/screening" className="underline">Choose another patient</Link>.</Notice></Page>;
   }
@@ -77,9 +77,23 @@ export default async function ScreeningPage({ searchParams }: { searchParams: Pr
         <div className="mt-5">
           <ScreeningWorkspace
             patientId={patient.id}
-            device={edge.ok
-              ? { online: true, camera: edge.health.camera.available, model: edge.health.model_file, detail: edge.health.camera.detail }
-              : { online: false, camera: false, model: null, detail: edge.error }}
+            device={inference.ok
+              ? {
+                  online: true,
+                  backend: inference.backend,
+                  camera: inference.camera,
+                  model: inference.health.model_file,
+                  detail: inference.backend === 'edge'
+                    ? inference.health.camera.detail
+                    : 'Raspberry Pi is not connected. Automatically processing using laptop CPU/GPU.',
+                }
+              : {
+                  online: false,
+                  backend: 'none',
+                  camera: false,
+                  model: null,
+                  detail: inference.error,
+                }}
           />
         </div>
       )}

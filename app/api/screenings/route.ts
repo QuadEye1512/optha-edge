@@ -4,7 +4,7 @@ import { PatientNotFoundError } from '@/data/patients';
 import { Laterality } from '@/generated/prisma/client';
 import { getCurrentActor } from '@/lib/auth/authorization';
 import { AuthorizationError } from '@/lib/auth/policy';
-import { captureOnEdge, EdgeUnavailableError, predictOnEdge } from '@/lib/edge/client';
+import { captureOnEdge, EdgeUnavailableError, LocalUnavailableError, predictAdaptive } from '@/lib/edge/client';
 import { InvalidEdgeResponseError, type EdgeResult } from '@/lib/edge/schema';
 import { declaredTypeMatchesContent, detectImageContentType } from '@/lib/imageFileSignature';
 import { StorageKeyError } from '@/lib/storage/crypto';
@@ -19,6 +19,7 @@ export interface ScreeningApiResponse {
   examinationId?: string;
   gradable?: boolean;
   message?: string;
+  backend?: 'edge' | 'local';
   quality?: { sharpness: number; brightness: number; reasons: string[] };
 }
 
@@ -47,6 +48,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     let original: { data: Buffer; mimeType: string; width: number; height: number };
     let result: EdgeResult;
+    let usedBackend: 'edge' | 'local' = 'edge';
 
     if (source === 'upload') {
       const file = form.get('image');
@@ -66,9 +68,13 @@ export async function POST(request: Request): Promise<Response> {
       }
       if (!metadata.width || !metadata.height) return reply({ ok: false, message: 'The image dimensions could not be read.' }, 400);
       original = { data, mimeType: detected, width: metadata.width, height: metadata.height };
-      result = await predictOnEdge(data, `capture.${detected === 'image/png' ? 'png' : 'jpg'}`, detected);
+
+      const adaptive = await predictAdaptive(data, `capture.${detected === 'image/png' ? 'png' : 'jpg'}`, detected);
+      result = adaptive.result;
+      usedBackend = adaptive.backend;
     } else {
       result = await captureOnEdge();
+      usedBackend = 'edge';
       if (!result.captured_jpeg) throw new InvalidEdgeResponseError('captured image missing');
       original = {
         data: Buffer.from(result.captured_jpeg, 'base64'),
@@ -78,9 +84,9 @@ export async function POST(request: Request): Promise<Response> {
       };
     }
 
-    const captureDevice = source === 'pi-camera'
-      ? `Raspberry Pi camera + 20D lens (${result.model_file})`
-      : `Uploaded image → Raspberry Pi (${result.model_file})`;
+    const captureDevice = usedBackend === 'edge'
+      ? (source === 'pi-camera' ? `Raspberry Pi camera + 20D lens (${result.model_file})` : `Uploaded image → Raspberry Pi (${result.model_file})`)
+      : `Uploaded image → Laptop processing (${result.model_file})`;
 
     const { examinationId } = await recordScreening(actor, { patientId, eye, source, captureDevice, original, result });
 
@@ -88,17 +94,26 @@ export async function POST(request: Request): Promise<Response> {
       ok: true,
       examinationId,
       gradable: result.gradable,
+      backend: usedBackend,
       message: result.gradable ? undefined : result.message,
       quality: { sharpness: result.quality.sharpness, brightness: result.quality.brightness, reasons: result.quality.reasons },
     });
   } catch (error) {
     if (error instanceof EdgeUnavailableError) {
-      // Never show an invented value: the result is simply unavailable.
+      if (source === 'pi-camera') {
+        return reply({
+          ok: false,
+          message: 'The Raspberry Pi camera is unavailable because the edge device is not connected. Connect the Raspberry Pi or select "Phone / upload" to screen using your laptop.',
+        }, 503);
+      }
       return reply({ ok: false, message: `${error.message.replace(/\.?$/, '.')} No result was produced.` }, error.status);
+    }
+    if (error instanceof LocalUnavailableError) {
+      return reply({ ok: false, message: `Local inference unavailable: ${error.message}` }, 503);
     }
     if (error instanceof InvalidEdgeResponseError) {
       console.error('[OpthaEdge]', error.message);
-      return reply({ ok: false, message: 'The edge device returned an invalid result. No result was stored.' }, 502);
+      return reply({ ok: false, message: 'The inference model returned an invalid result. No result was stored.' }, 502);
     }
     if (error instanceof ConsentRequiredError || error instanceof PatientNotFoundError) {
       return reply({ ok: false, message: error.message }, 403);

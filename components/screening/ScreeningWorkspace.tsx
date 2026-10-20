@@ -8,6 +8,7 @@ import { Badge, Notice, primaryButton, secondaryButton } from '@/components/ui';
 
 interface DeviceState {
   online: boolean;
+  backend?: 'edge' | 'local' | 'none';
   camera: boolean;
   model: string | null;
   detail: string | null | undefined;
@@ -24,6 +25,8 @@ const REASONS: Record<string, string> = {
 
 export default function ScreeningWorkspace({ patientId, device }: { patientId: string; device: DeviceState }) {
   const router = useRouter();
+  const [currentDevice, setCurrentDevice] = useState<DeviceState>(device);
+  const [deviceNotice, setDeviceNotice] = useState<string | null>(null);
   const [eye, setEye] = useState<Eye>('RIGHT');
   const [source, setSource] = useState<Source>(device.camera ? 'pi-camera' : 'upload');
   const [file, setFile] = useState<File | null>(null);
@@ -39,6 +42,43 @@ export default function ScreeningWorkspace({ patientId, device }: { patientId: s
   useEffect(() => () => {
     if (preview) URL.revokeObjectURL(preview);
   }, [preview]);
+
+  // Periodic polling for automatic edge device connection / disconnection detection
+  useEffect(() => {
+    let active = true;
+    const interval = setInterval(async () => {
+      try {
+        const response = await fetch('/api/device/status');
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!active) return;
+
+        setCurrentDevice((prev) => {
+          if (prev.backend === 'local' && data.backend === 'edge') {
+            setDeviceNotice('✨ Raspberry Pi detected! Automatically switched to Edge device processing.');
+            if (data.camera) setSource('pi-camera');
+          } else if (prev.backend === 'edge' && data.backend === 'local') {
+            setDeviceNotice('ℹ️ Raspberry Pi disconnected. Automatically processing using laptop CPU/GPU.');
+            setSource('upload');
+          }
+          return {
+            online: data.ok,
+            backend: data.backend,
+            camera: data.camera,
+            model: data.model,
+            detail: data.detail,
+          };
+        });
+      } catch {
+        // Ignore polling connection blips
+      }
+    }, 4000);
+
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   function chooseFile(selected: File | null) {
     setError(null);
@@ -75,7 +115,7 @@ export default function ScreeningWorkspace({ patientId, device }: { patientId: s
     setBusy(false);
   }
 
-  const canRun = device.online && !busy && (source === 'pi-camera' ? device.camera : Boolean(file));
+  const canRun = currentDevice.online && !busy && (source === 'pi-camera' ? currentDevice.camera : Boolean(file));
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
@@ -101,13 +141,20 @@ export default function ScreeningWorkspace({ patientId, device }: { patientId: s
         <section className="rounded-2xl border border-slate-800 bg-slate-900/65 p-4 sm:p-5">
           <h2 className="text-sm font-semibold text-slate-200">2. Capture the retina</h2>
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <button type="button" onClick={() => setSource('pi-camera')} disabled={!device.camera}
-              className={`rounded-xl border px-3 py-3 text-left text-xs transition disabled:opacity-40 ${source === 'pi-camera' ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 bg-slate-950/40 text-slate-400'}`}>
+            <button
+              type="button"
+              onClick={() => setSource('pi-camera')}
+              disabled={!currentDevice.camera}
+              className={`rounded-xl border px-3 py-3 text-left text-xs transition disabled:opacity-40 ${source === 'pi-camera' ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 bg-slate-950/40 text-slate-400'}`}
+            >
               <span className="block text-sm font-semibold">Pi camera</span>
-              Capture through the 20D lens on the device
+              {currentDevice.camera ? 'Capture through 20D lens' : 'Requires connected Raspberry Pi'}
             </button>
-            <button type="button" onClick={() => setSource('upload')}
-              className={`rounded-xl border px-3 py-3 text-left text-xs transition ${source === 'upload' ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 bg-slate-950/40 text-slate-400'}`}>
+            <button
+              type="button"
+              onClick={() => setSource('upload')}
+              className={`rounded-xl border px-3 py-3 text-left text-xs transition ${source === 'upload' ? 'border-cyan-400 bg-cyan-500/15 text-cyan-200' : 'border-slate-700 bg-slate-950/40 text-slate-400'}`}
+            >
               <span className="block text-sm font-semibold">Phone / upload</span>
               Take a photo or choose a fundus image
             </button>
@@ -156,7 +203,9 @@ export default function ScreeningWorkspace({ patientId, device }: { patientId: s
               )}
               <input ref={cameraInput} type="file" accept="image/jpeg,image/png" capture="environment" className="hidden" onChange={(event) => chooseFile(event.target.files?.[0] ?? null)} />
               <input ref={fileInput} type="file" accept="image/jpeg,image/png" className="hidden" onChange={(event) => chooseFile(event.target.files?.[0] ?? null)} />
-              <p className="mt-2 text-[11px] text-slate-600">JPEG or PNG, up to 15 MB. The image is processed on the Raspberry Pi, not in the browser.</p>
+              <p className="mt-2 text-[11px] text-slate-600">
+                JPEG or PNG, up to 15 MB. Processed on {currentDevice.backend === 'local' ? 'your laptop CPU/GPU' : 'the Raspberry Pi'}.
+              </p>
             </div>
           )}
         </section>
@@ -165,18 +214,44 @@ export default function ScreeningWorkspace({ patientId, device }: { patientId: s
       <div className="space-y-5">
         <section className="rounded-2xl border border-slate-800 bg-slate-900/65 p-4 sm:p-5">
           <div className="flex items-center justify-between gap-2">
-            <h2 className="text-sm font-semibold text-slate-200">Edge device</h2>
-            <Badge tone={device.online ? 'emerald' : 'rose'}>{device.online ? 'Pi online' : 'Pi offline'}</Badge>
+            <h2 className="text-sm font-semibold text-slate-200">Processing unit</h2>
+            {currentDevice.backend === 'edge' ? (
+              <Badge tone="emerald">Pi online (Active)</Badge>
+            ) : currentDevice.backend === 'local' ? (
+              <Badge tone="cyan">Laptop active (Fallback)</Badge>
+            ) : (
+              <Badge tone="rose">Offline</Badge>
+            )}
           </div>
           <dl className="mt-3 space-y-1.5 text-xs">
-            <div className="flex justify-between gap-2"><dt className="text-slate-500">Model</dt><dd className="font-mono text-slate-300">{device.model ?? '—'}</dd></div>
-            <div className="flex justify-between gap-2"><dt className="text-slate-500">Camera</dt><dd className="text-slate-300">{device.camera ? 'Ready' : 'Not available'}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-slate-500">Active engine</dt><dd className="font-medium text-slate-200">{currentDevice.backend === 'edge' ? 'Raspberry Pi' : currentDevice.backend === 'local' ? 'Laptop CPU/GPU (Local ONNX)' : 'None'}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-slate-500">Model artifact</dt><dd className="font-mono text-slate-300">{currentDevice.model ?? '—'}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-slate-500">Pi Camera (20D)</dt><dd className="text-slate-300">{currentDevice.camera ? 'Ready' : 'Not available'}</dd></div>
           </dl>
-          {!device.online ? <p className="mt-3 text-xs text-rose-200/80">{device.detail ?? 'The inference service is not reachable.'} Screening is unavailable — no result will be invented.</p> : null}
+
+          {deviceNotice ? (
+            <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/40 p-2.5 text-xs text-cyan-200">
+              {deviceNotice}
+            </div>
+          ) : null}
+
+          {currentDevice.backend === 'local' ? (
+            <div className="mt-3 rounded-xl border border-slate-800 bg-slate-950/40 p-2.5 text-[11px] leading-relaxed text-slate-400">
+              <span className="font-semibold text-slate-300">Auto-Detection Active:</span> Screening is currently processing on your laptop. Once you plug in or connect your Raspberry Pi, it will automatically switch to the edge device.
+            </div>
+          ) : !currentDevice.online ? (
+            <p className="mt-3 text-xs text-rose-200/80">{currentDevice.detail ?? 'Inference service is not reachable.'} Screening is unavailable.</p>
+          ) : null}
         </section>
 
         <button type="button" onClick={run} disabled={!canRun} className={`${primaryButton} w-full py-4 text-base`}>
-          {busy ? 'Processing on Raspberry Pi…' : source === 'pi-camera' ? 'Capture & analyse' : 'Analyse image'}
+          {busy
+            ? (currentDevice.backend === 'local' ? 'Processing on laptop CPU/GPU…' : 'Processing on Raspberry Pi…')
+            : source === 'pi-camera'
+              ? 'Capture & analyse'
+              : currentDevice.backend === 'local'
+                ? 'Analyse image (Laptop)'
+                : 'Analyse image (Edge Pi)'}
         </button>
 
         {error ? <Notice tone="rose">{error}</Notice> : null}

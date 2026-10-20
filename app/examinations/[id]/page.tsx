@@ -173,7 +173,7 @@ export default async function ExaminationPage({ params, searchParams }: { params
 
         <Card
           title="Patient education"
-          description="Disease explanation, diet and natural remedies — written for the patient by Claude, checked against their medicines."
+          description="Disease explanation, diet and natural remedies — written for the patient by an LLM (via OpenRouter), checked against their medicines."
           className="lg:col-span-2"
           actions={canEducate ? (
             <ActionForm action={generateEducationAction.bind(null, exam.id)} className="flex flex-col items-end gap-1">
@@ -184,7 +184,7 @@ export default async function ExaminationPage({ params, searchParams }: { params
           {exam.education ? (
             <>
               <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-                <Badge tone={exam.education.generator === CURATED_GENERATOR ? 'slate' : 'violet'}>{exam.education.generator === CURATED_GENERATOR ? 'Curated guidance' : 'AI-written (Claude)'}</Badge>
+                <Badge tone={exam.education.generator === CURATED_GENERATOR ? 'slate' : 'violet'}>{exam.education.generator === CURATED_GENERATOR ? 'Curated guidance' : `AI-written · ${exam.education.generator.replace(/^openrouter:/, '')}`}</Badge>
                 <span>{exam.education.language} · based on {exam.education.gradeSource === 'clinician-confirmed' ? 'clinician-confirmed' : 'preliminary AI'} grade {exam.education.grade} · {formatDateTime(exam.education.createdAt)}</span>
               </div>
               {exam.review && exam.review.confirmedGrade !== null && exam.education.gradeSource !== 'clinician-confirmed' ? (

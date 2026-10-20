@@ -48,8 +48,8 @@ IMAGE_ENCRYPTION_KEY="$(rand 48)"
 STORAGE_DIR="$DATA_DIR/storage"
 INFERENCE_URL="http://127.0.0.1:8001"
 INFERENCE_API_KEY="${INFERENCE_KEY}"
-ANTHROPIC_API_KEY=""
-LLM_MODEL=""
+: "${OPENROUTER_API_KEY:?Error: Set OPENROUTER_API_KEY before running this script}"
+OPENROUTER_MODEL="anthropic/claude-opus-5.5"
 PUBLIC_BASE_URL=""
 ORGANIZATION_NAME="OpthaEdge Screening Clinic"
 EOF
@@ -130,7 +130,7 @@ OpthaEdge is running.
   Then use "Add to Home screen" to install it as an app.
 
   Logs:      journalctl -u opthaedge-web -u opthaedge-inference -f
-  Config:    $CONF_DIR/opthaedge.env (add ANTHROPIC_API_KEY for AI patient education)
+  Config:    $CONF_DIR/opthaedge.env (add OPENROUTER_API_KEY for AI patient education)
              $CONF_DIR/inference.env (model, camera flip, quality thresholds)
   After editing config:  sudo systemctl restart opthaedge-web opthaedge-inference
 EOF
