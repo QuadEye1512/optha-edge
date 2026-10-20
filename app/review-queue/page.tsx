@@ -1,11 +1,35 @@
-import ModulePlaceholder from '@/components/ModulePlaceholder';
-import { MODULES } from '@/config/modules';
-import { notFound } from 'next/navigation';
+import ExaminationTable from '@/components/examinations/ExaminationTable';
+import { Card, Notice, Page, PageHeader } from '@/components/ui';
+import { reviewQueue } from '@/data/examinations';
+import { requireActor } from '@/lib/auth/authorization';
+import { PERMISSIONS } from '@/lib/auth/permissions';
+import { hasPermission } from '@/lib/auth/policy';
 
-export default function ReviewQueuePage() {
-  if (!MODULES.reviewQueue) {
-    notFound();
+export default async function ReviewQueuePage() {
+  const actor = await requireActor();
+  if (!hasPermission(actor, PERMISSIONS.REVIEW_SIGN)) {
+    return <Page><Notice tone="rose">Only clinicians can sign reviews.</Notice></Page>;
   }
+  const rows = await reviewQueue(actor);
+  // Referable AI grades first, then oldest first.
+  const ordered = [...rows].sort((a, b) => {
+    const referableA = a.grade !== null && a.grade >= 2 ? 1 : 0;
+    const referableB = b.grade !== null && b.grade >= 2 ? 1 : 0;
+    return referableB - referableA || a.examinedAt.localeCompare(b.examinedAt);
+  });
 
-  return <ModulePlaceholder eyebrow="Clinician workflow" title="Review Queue" description="Authorized clinicians will review original images and AI outputs, record independent conclusions, sign reviews, and preserve amendments." requirements={['Clinician role and credential verification', 'Approved review and referral protocol', 'Signed-review locking and amendment history', 'Separation of AI findings from clinician conclusions']} />;
+  return (
+    <Page width="max-w-4xl">
+      <PageHeader
+        eyebrow="Clinician workflow"
+        title="Review queue"
+        description="AI results waiting for a clinician to confirm or override. Possible referable disease is listed first."
+      />
+      <div className="mt-6">
+        <Card title={`${ordered.length} awaiting review`}>
+          <ExaminationTable rows={ordered} empty="Nothing waiting — every screening has been reviewed." />
+        </Card>
+      </div>
+    </Page>
+  );
 }

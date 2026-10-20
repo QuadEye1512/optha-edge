@@ -1,0 +1,21 @@
+[Unit]
+Description=OpthaEdge inference service (student DR model, Pi camera)
+After=network.target
+
+[Service]
+User=__APP_USER__
+Group=__APP_USER__
+SupplementaryGroups=video
+WorkingDirectory=__APP_DIR__/edge
+EnvironmentFile=/etc/opthaedge/inference.env
+# Bind to localhost: only the platform on this Pi calls it. For a split
+# deployment (platform on a laptop), bind to the Pi's LAN address instead and
+# keep INFERENCE_API_KEY set.
+ExecStart=/opt/opthaedge/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8001
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

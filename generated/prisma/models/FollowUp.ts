@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model FollowUp
- * Deferred Follow-ups data model. Retained to avoid destructive schema changes.
+ * 
  */
 export type FollowUpModel = runtime.Types.Result.DefaultSelection<Prisma.$FollowUpPayload>
 
@@ -29,6 +29,7 @@ export type FollowUpMinAggregateOutputType = {
   organizationId: string | null
   patientId: string | null
   carePlanId: string | null
+  examinationId: string | null
   status: $Enums.FollowUpStatus | null
   dueAt: Date | null
   completedAt: Date | null
@@ -40,6 +41,7 @@ export type FollowUpMaxAggregateOutputType = {
   organizationId: string | null
   patientId: string | null
   carePlanId: string | null
+  examinationId: string | null
   status: $Enums.FollowUpStatus | null
   dueAt: Date | null
   completedAt: Date | null
@@ -51,6 +53,7 @@ export type FollowUpCountAggregateOutputType = {
   organizationId: number
   patientId: number
   carePlanId: number
+  examinationId: number
   status: number
   dueAt: number
   completedAt: number
@@ -64,6 +67,7 @@ export type FollowUpMinAggregateInputType = {
   organizationId?: true
   patientId?: true
   carePlanId?: true
+  examinationId?: true
   status?: true
   dueAt?: true
   completedAt?: true
@@ -75,6 +79,7 @@ export type FollowUpMaxAggregateInputType = {
   organizationId?: true
   patientId?: true
   carePlanId?: true
+  examinationId?: true
   status?: true
   dueAt?: true
   completedAt?: true
@@ -86,6 +91,7 @@ export type FollowUpCountAggregateInputType = {
   organizationId?: true
   patientId?: true
   carePlanId?: true
+  examinationId?: true
   status?: true
   dueAt?: true
   completedAt?: true
@@ -170,6 +176,7 @@ export type FollowUpGroupByOutputType = {
   organizationId: string
   patientId: string
   carePlanId: string | null
+  examinationId: string | null
   status: $Enums.FollowUpStatus
   dueAt: Date
   completedAt: Date | null
@@ -202,6 +209,7 @@ export type FollowUpWhereInput = {
   organizationId?: Prisma.StringFilter<"FollowUp"> | string
   patientId?: Prisma.StringFilter<"FollowUp"> | string
   carePlanId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
+  examinationId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   completedAt?: Prisma.DateTimeNullableFilter<"FollowUp"> | Date | string | null
@@ -209,6 +217,7 @@ export type FollowUpWhereInput = {
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
   carePlan?: Prisma.XOR<Prisma.CarePlanNullableScalarRelationFilter, Prisma.CarePlanWhereInput> | null
+  examination?: Prisma.XOR<Prisma.ExaminationNullableScalarRelationFilter, Prisma.ExaminationWhereInput> | null
 }
 
 export type FollowUpOrderByWithRelationInput = {
@@ -216,6 +225,7 @@ export type FollowUpOrderByWithRelationInput = {
   organizationId?: Prisma.SortOrder
   patientId?: Prisma.SortOrder
   carePlanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  examinationId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -223,6 +233,7 @@ export type FollowUpOrderByWithRelationInput = {
   organization?: Prisma.OrganizationOrderByWithRelationInput
   patient?: Prisma.PatientOrderByWithRelationInput
   carePlan?: Prisma.CarePlanOrderByWithRelationInput
+  examination?: Prisma.ExaminationOrderByWithRelationInput
 }
 
 export type FollowUpWhereUniqueInput = Prisma.AtLeast<{
@@ -233,6 +244,7 @@ export type FollowUpWhereUniqueInput = Prisma.AtLeast<{
   organizationId?: Prisma.StringFilter<"FollowUp"> | string
   patientId?: Prisma.StringFilter<"FollowUp"> | string
   carePlanId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
+  examinationId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   completedAt?: Prisma.DateTimeNullableFilter<"FollowUp"> | Date | string | null
@@ -240,6 +252,7 @@ export type FollowUpWhereUniqueInput = Prisma.AtLeast<{
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
   carePlan?: Prisma.XOR<Prisma.CarePlanNullableScalarRelationFilter, Prisma.CarePlanWhereInput> | null
+  examination?: Prisma.XOR<Prisma.ExaminationNullableScalarRelationFilter, Prisma.ExaminationWhereInput> | null
 }, "id">
 
 export type FollowUpOrderByWithAggregationInput = {
@@ -247,6 +260,7 @@ export type FollowUpOrderByWithAggregationInput = {
   organizationId?: Prisma.SortOrder
   patientId?: Prisma.SortOrder
   carePlanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  examinationId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -264,6 +278,7 @@ export type FollowUpScalarWhereWithAggregatesInput = {
   organizationId?: Prisma.StringWithAggregatesFilter<"FollowUp"> | string
   patientId?: Prisma.StringWithAggregatesFilter<"FollowUp"> | string
   carePlanId?: Prisma.StringNullableWithAggregatesFilter<"FollowUp"> | string | null
+  examinationId?: Prisma.StringNullableWithAggregatesFilter<"FollowUp"> | string | null
   status?: Prisma.EnumFollowUpStatusWithAggregatesFilter<"FollowUp"> | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeWithAggregatesFilter<"FollowUp"> | Date | string
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FollowUp"> | Date | string | null
@@ -279,6 +294,7 @@ export type FollowUpCreateInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutFollowUpsInput
   patient: Prisma.PatientCreateNestedOneWithoutFollowUpsInput
   carePlan?: Prisma.CarePlanCreateNestedOneWithoutFollowUpsInput
+  examination?: Prisma.ExaminationCreateNestedOneWithoutFollowUpsInput
 }
 
 export type FollowUpUncheckedCreateInput = {
@@ -286,6 +302,7 @@ export type FollowUpUncheckedCreateInput = {
   organizationId: string
   patientId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -301,6 +318,7 @@ export type FollowUpUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutFollowUpsNestedInput
   patient?: Prisma.PatientUpdateOneRequiredWithoutFollowUpsNestedInput
   carePlan?: Prisma.CarePlanUpdateOneWithoutFollowUpsNestedInput
+  examination?: Prisma.ExaminationUpdateOneWithoutFollowUpsNestedInput
 }
 
 export type FollowUpUncheckedUpdateInput = {
@@ -308,6 +326,7 @@ export type FollowUpUncheckedUpdateInput = {
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -319,6 +338,7 @@ export type FollowUpCreateManyInput = {
   organizationId: string
   patientId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -338,6 +358,7 @@ export type FollowUpUncheckedUpdateManyInput = {
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -359,6 +380,7 @@ export type FollowUpCountOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   patientId?: Prisma.SortOrder
   carePlanId?: Prisma.SortOrder
+  examinationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -370,6 +392,7 @@ export type FollowUpMaxOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   patientId?: Prisma.SortOrder
   carePlanId?: Prisma.SortOrder
+  examinationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -381,6 +404,7 @@ export type FollowUpMinOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   patientId?: Prisma.SortOrder
   carePlanId?: Prisma.SortOrder
+  examinationId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -471,6 +495,48 @@ export type FollowUpUncheckedUpdateManyWithoutPatientNestedInput = {
   deleteMany?: Prisma.FollowUpScalarWhereInput | Prisma.FollowUpScalarWhereInput[]
 }
 
+export type FollowUpCreateNestedManyWithoutExaminationInput = {
+  create?: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput> | Prisma.FollowUpCreateWithoutExaminationInput[] | Prisma.FollowUpUncheckedCreateWithoutExaminationInput[]
+  connectOrCreate?: Prisma.FollowUpCreateOrConnectWithoutExaminationInput | Prisma.FollowUpCreateOrConnectWithoutExaminationInput[]
+  createMany?: Prisma.FollowUpCreateManyExaminationInputEnvelope
+  connect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+}
+
+export type FollowUpUncheckedCreateNestedManyWithoutExaminationInput = {
+  create?: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput> | Prisma.FollowUpCreateWithoutExaminationInput[] | Prisma.FollowUpUncheckedCreateWithoutExaminationInput[]
+  connectOrCreate?: Prisma.FollowUpCreateOrConnectWithoutExaminationInput | Prisma.FollowUpCreateOrConnectWithoutExaminationInput[]
+  createMany?: Prisma.FollowUpCreateManyExaminationInputEnvelope
+  connect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+}
+
+export type FollowUpUpdateManyWithoutExaminationNestedInput = {
+  create?: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput> | Prisma.FollowUpCreateWithoutExaminationInput[] | Prisma.FollowUpUncheckedCreateWithoutExaminationInput[]
+  connectOrCreate?: Prisma.FollowUpCreateOrConnectWithoutExaminationInput | Prisma.FollowUpCreateOrConnectWithoutExaminationInput[]
+  upsert?: Prisma.FollowUpUpsertWithWhereUniqueWithoutExaminationInput | Prisma.FollowUpUpsertWithWhereUniqueWithoutExaminationInput[]
+  createMany?: Prisma.FollowUpCreateManyExaminationInputEnvelope
+  set?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  disconnect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  delete?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  connect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  update?: Prisma.FollowUpUpdateWithWhereUniqueWithoutExaminationInput | Prisma.FollowUpUpdateWithWhereUniqueWithoutExaminationInput[]
+  updateMany?: Prisma.FollowUpUpdateManyWithWhereWithoutExaminationInput | Prisma.FollowUpUpdateManyWithWhereWithoutExaminationInput[]
+  deleteMany?: Prisma.FollowUpScalarWhereInput | Prisma.FollowUpScalarWhereInput[]
+}
+
+export type FollowUpUncheckedUpdateManyWithoutExaminationNestedInput = {
+  create?: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput> | Prisma.FollowUpCreateWithoutExaminationInput[] | Prisma.FollowUpUncheckedCreateWithoutExaminationInput[]
+  connectOrCreate?: Prisma.FollowUpCreateOrConnectWithoutExaminationInput | Prisma.FollowUpCreateOrConnectWithoutExaminationInput[]
+  upsert?: Prisma.FollowUpUpsertWithWhereUniqueWithoutExaminationInput | Prisma.FollowUpUpsertWithWhereUniqueWithoutExaminationInput[]
+  createMany?: Prisma.FollowUpCreateManyExaminationInputEnvelope
+  set?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  disconnect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  delete?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  connect?: Prisma.FollowUpWhereUniqueInput | Prisma.FollowUpWhereUniqueInput[]
+  update?: Prisma.FollowUpUpdateWithWhereUniqueWithoutExaminationInput | Prisma.FollowUpUpdateWithWhereUniqueWithoutExaminationInput[]
+  updateMany?: Prisma.FollowUpUpdateManyWithWhereWithoutExaminationInput | Prisma.FollowUpUpdateManyWithWhereWithoutExaminationInput[]
+  deleteMany?: Prisma.FollowUpScalarWhereInput | Prisma.FollowUpScalarWhereInput[]
+}
+
 export type FollowUpCreateNestedManyWithoutCarePlanInput = {
   create?: Prisma.XOR<Prisma.FollowUpCreateWithoutCarePlanInput, Prisma.FollowUpUncheckedCreateWithoutCarePlanInput> | Prisma.FollowUpCreateWithoutCarePlanInput[] | Prisma.FollowUpUncheckedCreateWithoutCarePlanInput[]
   connectOrCreate?: Prisma.FollowUpCreateOrConnectWithoutCarePlanInput | Prisma.FollowUpCreateOrConnectWithoutCarePlanInput[]
@@ -525,12 +591,14 @@ export type FollowUpCreateWithoutOrganizationInput = {
   notes?: string | null
   patient: Prisma.PatientCreateNestedOneWithoutFollowUpsInput
   carePlan?: Prisma.CarePlanCreateNestedOneWithoutFollowUpsInput
+  examination?: Prisma.ExaminationCreateNestedOneWithoutFollowUpsInput
 }
 
 export type FollowUpUncheckedCreateWithoutOrganizationInput = {
   id?: string
   patientId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -571,6 +639,7 @@ export type FollowUpScalarWhereInput = {
   organizationId?: Prisma.StringFilter<"FollowUp"> | string
   patientId?: Prisma.StringFilter<"FollowUp"> | string
   carePlanId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
+  examinationId?: Prisma.StringNullableFilter<"FollowUp"> | string | null
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   completedAt?: Prisma.DateTimeNullableFilter<"FollowUp"> | Date | string | null
@@ -585,12 +654,14 @@ export type FollowUpCreateWithoutPatientInput = {
   notes?: string | null
   organization: Prisma.OrganizationCreateNestedOneWithoutFollowUpsInput
   carePlan?: Prisma.CarePlanCreateNestedOneWithoutFollowUpsInput
+  examination?: Prisma.ExaminationCreateNestedOneWithoutFollowUpsInput
 }
 
 export type FollowUpUncheckedCreateWithoutPatientInput = {
   id?: string
   organizationId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -623,6 +694,54 @@ export type FollowUpUpdateManyWithWhereWithoutPatientInput = {
   data: Prisma.XOR<Prisma.FollowUpUpdateManyMutationInput, Prisma.FollowUpUncheckedUpdateManyWithoutPatientInput>
 }
 
+export type FollowUpCreateWithoutExaminationInput = {
+  id?: string
+  status?: $Enums.FollowUpStatus
+  dueAt: Date | string
+  completedAt?: Date | string | null
+  notes?: string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutFollowUpsInput
+  patient: Prisma.PatientCreateNestedOneWithoutFollowUpsInput
+  carePlan?: Prisma.CarePlanCreateNestedOneWithoutFollowUpsInput
+}
+
+export type FollowUpUncheckedCreateWithoutExaminationInput = {
+  id?: string
+  organizationId: string
+  patientId: string
+  carePlanId?: string | null
+  status?: $Enums.FollowUpStatus
+  dueAt: Date | string
+  completedAt?: Date | string | null
+  notes?: string | null
+}
+
+export type FollowUpCreateOrConnectWithoutExaminationInput = {
+  where: Prisma.FollowUpWhereUniqueInput
+  create: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput>
+}
+
+export type FollowUpCreateManyExaminationInputEnvelope = {
+  data: Prisma.FollowUpCreateManyExaminationInput | Prisma.FollowUpCreateManyExaminationInput[]
+  skipDuplicates?: boolean
+}
+
+export type FollowUpUpsertWithWhereUniqueWithoutExaminationInput = {
+  where: Prisma.FollowUpWhereUniqueInput
+  update: Prisma.XOR<Prisma.FollowUpUpdateWithoutExaminationInput, Prisma.FollowUpUncheckedUpdateWithoutExaminationInput>
+  create: Prisma.XOR<Prisma.FollowUpCreateWithoutExaminationInput, Prisma.FollowUpUncheckedCreateWithoutExaminationInput>
+}
+
+export type FollowUpUpdateWithWhereUniqueWithoutExaminationInput = {
+  where: Prisma.FollowUpWhereUniqueInput
+  data: Prisma.XOR<Prisma.FollowUpUpdateWithoutExaminationInput, Prisma.FollowUpUncheckedUpdateWithoutExaminationInput>
+}
+
+export type FollowUpUpdateManyWithWhereWithoutExaminationInput = {
+  where: Prisma.FollowUpScalarWhereInput
+  data: Prisma.XOR<Prisma.FollowUpUpdateManyMutationInput, Prisma.FollowUpUncheckedUpdateManyWithoutExaminationInput>
+}
+
 export type FollowUpCreateWithoutCarePlanInput = {
   id?: string
   status?: $Enums.FollowUpStatus
@@ -631,12 +750,14 @@ export type FollowUpCreateWithoutCarePlanInput = {
   notes?: string | null
   organization: Prisma.OrganizationCreateNestedOneWithoutFollowUpsInput
   patient: Prisma.PatientCreateNestedOneWithoutFollowUpsInput
+  examination?: Prisma.ExaminationCreateNestedOneWithoutFollowUpsInput
 }
 
 export type FollowUpUncheckedCreateWithoutCarePlanInput = {
   id?: string
   organizationId: string
   patientId: string
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -673,6 +794,7 @@ export type FollowUpCreateManyOrganizationInput = {
   id?: string
   patientId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -687,12 +809,14 @@ export type FollowUpUpdateWithoutOrganizationInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   patient?: Prisma.PatientUpdateOneRequiredWithoutFollowUpsNestedInput
   carePlan?: Prisma.CarePlanUpdateOneWithoutFollowUpsNestedInput
+  examination?: Prisma.ExaminationUpdateOneWithoutFollowUpsNestedInput
 }
 
 export type FollowUpUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -703,6 +827,7 @@ export type FollowUpUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -713,6 +838,7 @@ export type FollowUpCreateManyPatientInput = {
   id?: string
   organizationId: string
   carePlanId?: string | null
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -727,12 +853,14 @@ export type FollowUpUpdateWithoutPatientInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutFollowUpsNestedInput
   carePlan?: Prisma.CarePlanUpdateOneWithoutFollowUpsNestedInput
+  examination?: Prisma.ExaminationUpdateOneWithoutFollowUpsNestedInput
 }
 
 export type FollowUpUncheckedUpdateWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -742,6 +870,51 @@ export type FollowUpUncheckedUpdateWithoutPatientInput = {
 export type FollowUpUncheckedUpdateManyWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
+  dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type FollowUpCreateManyExaminationInput = {
+  id?: string
+  organizationId: string
+  patientId: string
+  carePlanId?: string | null
+  status?: $Enums.FollowUpStatus
+  dueAt: Date | string
+  completedAt?: Date | string | null
+  notes?: string | null
+}
+
+export type FollowUpUpdateWithoutExaminationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
+  dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutFollowUpsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutFollowUpsNestedInput
+  carePlan?: Prisma.CarePlanUpdateOneWithoutFollowUpsNestedInput
+}
+
+export type FollowUpUncheckedUpdateWithoutExaminationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  patientId?: Prisma.StringFieldUpdateOperationsInput | string
+  carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
+  dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type FollowUpUncheckedUpdateManyWithoutExaminationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  patientId?: Prisma.StringFieldUpdateOperationsInput | string
   carePlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -753,6 +926,7 @@ export type FollowUpCreateManyCarePlanInput = {
   id?: string
   organizationId: string
   patientId: string
+  examinationId?: string | null
   status?: $Enums.FollowUpStatus
   dueAt: Date | string
   completedAt?: Date | string | null
@@ -767,12 +941,14 @@ export type FollowUpUpdateWithoutCarePlanInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutFollowUpsNestedInput
   patient?: Prisma.PatientUpdateOneRequiredWithoutFollowUpsNestedInput
+  examination?: Prisma.ExaminationUpdateOneWithoutFollowUpsNestedInput
 }
 
 export type FollowUpUncheckedUpdateWithoutCarePlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -783,6 +959,7 @@ export type FollowUpUncheckedUpdateManyWithoutCarePlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
+  examinationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -796,6 +973,7 @@ export type FollowUpSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   organizationId?: boolean
   patientId?: boolean
   carePlanId?: boolean
+  examinationId?: boolean
   status?: boolean
   dueAt?: boolean
   completedAt?: boolean
@@ -803,6 +981,7 @@ export type FollowUpSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }, ExtArgs["result"]["followUp"]>
 
 export type FollowUpSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -810,6 +989,7 @@ export type FollowUpSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   organizationId?: boolean
   patientId?: boolean
   carePlanId?: boolean
+  examinationId?: boolean
   status?: boolean
   dueAt?: boolean
   completedAt?: boolean
@@ -817,6 +997,7 @@ export type FollowUpSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }, ExtArgs["result"]["followUp"]>
 
 export type FollowUpSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -824,6 +1005,7 @@ export type FollowUpSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   organizationId?: boolean
   patientId?: boolean
   carePlanId?: boolean
+  examinationId?: boolean
   status?: boolean
   dueAt?: boolean
   completedAt?: boolean
@@ -831,6 +1013,7 @@ export type FollowUpSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }, ExtArgs["result"]["followUp"]>
 
 export type FollowUpSelectScalar = {
@@ -838,27 +1021,31 @@ export type FollowUpSelectScalar = {
   organizationId?: boolean
   patientId?: boolean
   carePlanId?: boolean
+  examinationId?: boolean
   status?: boolean
   dueAt?: boolean
   completedAt?: boolean
   notes?: boolean
 }
 
-export type FollowUpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "patientId" | "carePlanId" | "status" | "dueAt" | "completedAt" | "notes", ExtArgs["result"]["followUp"]>
+export type FollowUpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "patientId" | "carePlanId" | "examinationId" | "status" | "dueAt" | "completedAt" | "notes", ExtArgs["result"]["followUp"]>
 export type FollowUpInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }
 export type FollowUpIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }
 export type FollowUpIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   carePlan?: boolean | Prisma.FollowUp$carePlanArgs<ExtArgs>
+  examination?: boolean | Prisma.FollowUp$examinationArgs<ExtArgs>
 }
 
 export type $FollowUpPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -867,12 +1054,14 @@ export type $FollowUpPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     organization: Prisma.$OrganizationPayload<ExtArgs>
     patient: Prisma.$PatientPayload<ExtArgs>
     carePlan: Prisma.$CarePlanPayload<ExtArgs> | null
+    examination: Prisma.$ExaminationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     organizationId: string
     patientId: string
     carePlanId: string | null
+    examinationId: string | null
     status: $Enums.FollowUpStatus
     dueAt: Date
     completedAt: Date | null
@@ -1274,6 +1463,7 @@ export interface Prisma__FollowUpClient<T, Null = never, ExtArgs extends runtime
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   patient<T extends Prisma.PatientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PatientDefaultArgs<ExtArgs>>): Prisma.Prisma__PatientClient<runtime.Types.Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   carePlan<T extends Prisma.FollowUp$carePlanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FollowUp$carePlanArgs<ExtArgs>>): Prisma.Prisma__CarePlanClient<runtime.Types.Result.GetResult<Prisma.$CarePlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  examination<T extends Prisma.FollowUp$examinationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FollowUp$examinationArgs<ExtArgs>>): Prisma.Prisma__ExaminationClient<runtime.Types.Result.GetResult<Prisma.$ExaminationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1307,6 +1497,7 @@ export interface FollowUpFieldRefs {
   readonly organizationId: Prisma.FieldRef<"FollowUp", 'String'>
   readonly patientId: Prisma.FieldRef<"FollowUp", 'String'>
   readonly carePlanId: Prisma.FieldRef<"FollowUp", 'String'>
+  readonly examinationId: Prisma.FieldRef<"FollowUp", 'String'>
   readonly status: Prisma.FieldRef<"FollowUp", 'FollowUpStatus'>
   readonly dueAt: Prisma.FieldRef<"FollowUp", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"FollowUp", 'DateTime'>
@@ -1728,6 +1919,25 @@ export type FollowUp$carePlanArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.CarePlanInclude<ExtArgs> | null
   where?: Prisma.CarePlanWhereInput
+}
+
+/**
+ * FollowUp.examination
+ */
+export type FollowUp$examinationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Examination
+   */
+  select?: Prisma.ExaminationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Examination
+   */
+  omit?: Prisma.ExaminationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExaminationInclude<ExtArgs> | null
+  where?: Prisma.ExaminationWhereInput
 }
 
 /**

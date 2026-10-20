@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import AppShell from "@/components/AppShell";
 import { getViewerDTO } from "@/lib/auth/authorization";
@@ -15,17 +15,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpthaEdge — Retinal Screening Decision Support",
+  title: "OpthaEdge — Diabetic Eye Screening",
   description:
-    "Research-stage AI-assisted diabetic retinopathy screening and severity model review. Screening results require professional review and are not diagnoses.",
-  keywords: [
-    "diabetic retinopathy",
-    "retinal screening",
-    "eye screening decision support",
-    "medical AI research",
-    "fundus image analysis",
-    "OpthaEdge",
-  ],
+    "Edge AI diabetic retinopathy screening on Raspberry Pi with patient records, clinician review and patient education. Research use only.",
+  applicationName: "OpthaEdge",
+  appleWebApp: { capable: true, title: "OpthaEdge", statusBarStyle: "black-translucent" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#020617",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({

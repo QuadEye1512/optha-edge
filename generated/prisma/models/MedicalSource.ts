@@ -383,14 +383,6 @@ export type MedicalSourceScalarRelationFilter = {
   isNot?: Prisma.MedicalSourceWhereInput
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type MedicalSourceCreateNestedOneWithoutSourceLinksInput = {
   create?: Prisma.XOR<Prisma.MedicalSourceCreateWithoutSourceLinksInput, Prisma.MedicalSourceUncheckedCreateWithoutSourceLinksInput>
   connectOrCreate?: Prisma.MedicalSourceCreateOrConnectWithoutSourceLinksInput

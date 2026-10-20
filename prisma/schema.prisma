@@ -205,6 +205,8 @@ model Organization {
   followUps          FollowUp[]
   appointments       Appointment[]
   auditEvents        AuditEvent[]
+  educationReports   PatientEducation[]
+  reportShares       ReportShare[]
 
   @@map("organizations")
 }
@@ -215,6 +217,8 @@ model User {
   email                String                   @unique
   displayName          String
   status               UserStatus               @default(INVITED)
+  passwordHash         String?
+  lastLoginAt          DateTime?
   createdAt            DateTime                 @default(now())
   updatedAt            DateTime                 @updatedAt
   memberships          OrganizationMembership[]
@@ -230,6 +234,8 @@ model User {
   treatments           Treatment[]
   createdCarePlans     CarePlan[]               @relation("CarePlanCreatedBy")
   auditEvents          AuditEvent[]             @relation("AuditActor")
+  educationReports     PatientEducation[]
+  reportShares         ReportShare[]
 
   @@map("users")
 }
@@ -309,6 +315,7 @@ model Patient {
   carePlans        CarePlan[]
   followUps        FollowUp[]
   appointments     Appointment[]
+  educationReports PatientEducation[]
 
   @@unique([organizationId, patientNumber])
   @@index([organizationId, status])
@@ -508,26 +515,29 @@ model ClinicianNote {
 }
 
 model Examination {
-  id              String               @id @default(cuid())
-  organizationId  String
-  patientId       String
-  eye             Laterality
-  status          ExaminationStatus    @default(DRAFT)
-  examinedAt      DateTime             @default(now())
-  imageSource     String?
-  captureDevice   String?
-  createdByUserId String
-  createdAt       DateTime             @default(now())
-  organization    Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
-  patient         Patient              @relation(fields: [patientId], references: [id], onDelete: Restrict)
-  createdBy       User                 @relation("ExaminationCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
-  images          EyeImage[]
-  predictions     Prediction[]
-  reviews         ClinicianReview[]
-  diagnoses       ClinicianDiagnosis[]
-  referrals       Referral[]
-  treatments      Treatment[]
-  carePlans       CarePlan[]
+  id               String               @id @default(cuid())
+  organizationId   String
+  patientId        String
+  eye              Laterality
+  status           ExaminationStatus    @default(DRAFT)
+  examinedAt       DateTime             @default(now())
+  imageSource      String?
+  captureDevice    String?
+  createdByUserId  String
+  createdAt        DateTime             @default(now())
+  organization     Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  patient          Patient              @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  createdBy        User                 @relation("ExaminationCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+  images           EyeImage[]
+  predictions      Prediction[]
+  reviews          ClinicianReview[]
+  diagnoses        ClinicianDiagnosis[]
+  referrals        Referral[]
+  treatments       Treatment[]
+  carePlans        CarePlan[]
+  educationReports PatientEducation[]
+  reportShares     ReportShare[]
+  followUps        FollowUp[]
 
   @@index([organizationId, patientId, eye, examinedAt])
   @@index([createdByUserId])
@@ -535,21 +545,23 @@ model Examination {
 }
 
 model EyeImage {
-  id                 String                   @id @default(cuid())
-  organizationId     String
-  examinationId      String
-  eye                Laterality
-  storageKey         String
-  sha256             String
-  mimeType           String
-  width              Int
-  height             Int
-  capturedAt         DateTime?
-  createdAt          DateTime                 @default(now())
-  organization       Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
-  examination        Examination              @relation(fields: [examinationId], references: [id], onDelete: Restrict)
-  qualityAssessments ImageQualityAssessment[]
-  predictions        Prediction[]
+  id                   String                   @id @default(cuid())
+  organizationId       String
+  examinationId        String
+  eye                  Laterality
+  storageKey           String
+  /// Encrypted copy of the exact 224x224 image the model received.
+  modelInputStorageKey String?
+  sha256               String
+  mimeType             String
+  width                Int
+  height               Int
+  capturedAt           DateTime?
+  createdAt            DateTime                 @default(now())
+  organization         Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  examination          Examination              @relation(fields: [examinationId], references: [id], onDelete: Restrict)
+  qualityAssessments   ImageQualityAssessment[]
+  predictions          Prediction[]
 
   @@unique([organizationId, storageKey])
   @@index([examinationId, eye])
@@ -674,7 +686,6 @@ model ExplainabilityAsset {
   @@map("explainability_assets")
 }
 
-/// Deferred Review Queue data model. Retained to avoid destructive schema changes.
 model ClinicianReview {
   id                  String               @id @default(cuid())
   organizationId      String
@@ -682,6 +693,8 @@ model ClinicianReview {
   predictionId        String?
   reviewerId          String
   decision            ReviewDecision
+  /// Clinician-confirmed DR grade 0-4 (null when not gradable or indeterminate).
+  confirmedGrade      Int?
   assessment          String
   referralUrgency     ReferralUrgency      @default(NOT_APPLICABLE)
   referralReason      String?
@@ -813,12 +826,12 @@ model CarePlan {
   @@map("care_plans")
 }
 
-/// Deferred Follow-ups data model. Retained to avoid destructive schema changes.
 model FollowUp {
   id             String         @id @default(cuid())
   organizationId String
   patientId      String
   carePlanId     String?
+  examinationId  String?
   status         FollowUpStatus @default(SCHEDULED)
   dueAt          DateTime
   completedAt    DateTime?
@@ -826,10 +839,12 @@ model FollowUp {
   organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   patient        Patient        @relation(fields: [patientId], references: [id], onDelete: Restrict)
   carePlan       CarePlan?      @relation(fields: [carePlanId], references: [id], onDelete: Restrict)
+  examination    Examination?   @relation(fields: [examinationId], references: [id], onDelete: Restrict)
 
   @@index([organizationId, status, dueAt])
   @@index([patientId])
   @@index([carePlanId])
+  @@index([examinationId])
   @@map("follow_ups")
 }
 
@@ -916,6 +931,53 @@ model MedicalContentReview {
 
   @@index([articleVersionId, reviewedAt])
   @@map("medical_content_reviews")
+}
+
+/// AI-generated patient education (disease explanation, diet and natural
+/// remedies) for one examination. Immutable; regenerating creates a new row.
+model PatientEducation {
+  id              String       @id @default(cuid())
+  organizationId  String
+  patientId       String
+  examinationId   String
+  grade           Int
+  gradeSource     String
+  language        String
+  content         Json
+  generator       String
+  promptVersion   String
+  createdByUserId String?
+  createdAt       DateTime     @default(now())
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  patient         Patient      @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  examination     Examination  @relation(fields: [examinationId], references: [id], onDelete: Restrict)
+  createdBy       User?        @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, examinationId, createdAt])
+  @@index([patientId])
+  @@index([createdByUserId])
+  @@map("patient_education")
+}
+
+/// Time-limited read-only link that lets a patient open their report on a phone.
+model ReportShare {
+  id              String       @id @default(cuid())
+  organizationId  String
+  examinationId   String
+  tokenHash       String       @unique
+  expiresAt       DateTime
+  revokedAt       DateTime?
+  lastViewedAt    DateTime?
+  viewCount       Int          @default(0)
+  createdByUserId String
+  createdAt       DateTime     @default(now())
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  examination     Examination  @relation(fields: [examinationId], references: [id], onDelete: Restrict)
+  createdBy       User         @relation(fields: [createdByUserId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId, examinationId])
+  @@index([createdByUserId])
+  @@map("report_shares")
 }
 
 model AuditEvent {

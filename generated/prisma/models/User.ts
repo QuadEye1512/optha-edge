@@ -30,6 +30,8 @@ export type UserMinAggregateOutputType = {
   email: string | null
   displayName: string | null
   status: $Enums.UserStatus | null
+  passwordHash: string | null
+  lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +42,8 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   displayName: string | null
   status: $Enums.UserStatus | null
+  passwordHash: string | null
+  lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +54,8 @@ export type UserCountAggregateOutputType = {
   email: number
   displayName: number
   status: number
+  passwordHash: number
+  lastLoginAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -62,6 +68,8 @@ export type UserMinAggregateInputType = {
   email?: true
   displayName?: true
   status?: true
+  passwordHash?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -72,6 +80,8 @@ export type UserMaxAggregateInputType = {
   email?: true
   displayName?: true
   status?: true
+  passwordHash?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +92,8 @@ export type UserCountAggregateInputType = {
   email?: true
   displayName?: true
   status?: true
+  passwordHash?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +177,8 @@ export type UserGroupByOutputType = {
   email: string
   displayName: string
   status: $Enums.UserStatus
+  passwordHash: string | null
+  lastLoginAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -196,6 +210,8 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   displayName?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   memberships?: Prisma.OrganizationMembershipListRelationFilter
@@ -211,6 +227,8 @@ export type UserWhereInput = {
   treatments?: Prisma.TreatmentListRelationFilter
   createdCarePlans?: Prisma.CarePlanListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  educationReports?: Prisma.PatientEducationListRelationFilter
+  reportShares?: Prisma.ReportShareListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -219,6 +237,8 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   memberships?: Prisma.OrganizationMembershipOrderByRelationAggregateInput
@@ -234,6 +254,8 @@ export type UserOrderByWithRelationInput = {
   treatments?: Prisma.TreatmentOrderByRelationAggregateInput
   createdCarePlans?: Prisma.CarePlanOrderByRelationAggregateInput
   auditEvents?: Prisma.AuditEventOrderByRelationAggregateInput
+  educationReports?: Prisma.PatientEducationOrderByRelationAggregateInput
+  reportShares?: Prisma.ReportShareOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +267,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   displayName?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   memberships?: Prisma.OrganizationMembershipListRelationFilter
@@ -260,6 +284,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   treatments?: Prisma.TreatmentListRelationFilter
   createdCarePlans?: Prisma.CarePlanListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  educationReports?: Prisma.PatientEducationListRelationFilter
+  reportShares?: Prisma.ReportShareListRelationFilter
 }, "id" | "oidcSubject" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -268,6 +294,8 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -284,6 +312,8 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   displayName?: Prisma.StringWithAggregatesFilter<"User"> | string
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
+  passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -294,6 +324,8 @@ export type UserCreateInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -309,6 +341,8 @@ export type UserCreateInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -317,6 +351,8 @@ export type UserUncheckedCreateInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -332,6 +368,8 @@ export type UserUncheckedCreateInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUpdateInput = {
@@ -340,6 +378,8 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -355,6 +395,8 @@ export type UserUpdateInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -363,6 +405,8 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -378,6 +422,8 @@ export type UserUncheckedUpdateInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -386,6 +432,8 @@ export type UserCreateManyInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -396,6 +444,8 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -406,6 +456,8 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -416,6 +468,8 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -426,6 +480,8 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -436,6 +492,8 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -452,6 +510,10 @@ export type UserNullableScalarRelationFilter = {
 
 export type EnumUserStatusFieldUpdateOperationsInput = {
   set?: $Enums.UserStatus
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type UserCreateNestedOneWithoutMembershipsInput = {
@@ -630,6 +692,36 @@ export type UserUpdateOneRequiredWithoutCreatedCarePlansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedCarePlansInput, Prisma.UserUpdateWithoutCreatedCarePlansInput>, Prisma.UserUncheckedUpdateWithoutCreatedCarePlansInput>
 }
 
+export type UserCreateNestedOneWithoutEducationReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEducationReportsInput, Prisma.UserUncheckedCreateWithoutEducationReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEducationReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutEducationReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEducationReportsInput, Prisma.UserUncheckedCreateWithoutEducationReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEducationReportsInput
+  upsert?: Prisma.UserUpsertWithoutEducationReportsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEducationReportsInput, Prisma.UserUpdateWithoutEducationReportsInput>, Prisma.UserUncheckedUpdateWithoutEducationReportsInput>
+}
+
+export type UserCreateNestedOneWithoutReportSharesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportSharesInput, Prisma.UserUncheckedCreateWithoutReportSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReportSharesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportSharesInput, Prisma.UserUncheckedCreateWithoutReportSharesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportSharesInput
+  upsert?: Prisma.UserUpsertWithoutReportSharesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportSharesInput, Prisma.UserUpdateWithoutReportSharesInput>, Prisma.UserUncheckedUpdateWithoutReportSharesInput>
+}
+
 export type UserCreateNestedOneWithoutAuditEventsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuditEventsInput, Prisma.UserUncheckedCreateWithoutAuditEventsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditEventsInput
@@ -652,6 +744,8 @@ export type UserCreateWithoutMembershipsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   capturedConsents?: Prisma.ConsentRecordCreateNestedManyWithoutCapturedByInput
@@ -666,6 +760,8 @@ export type UserCreateWithoutMembershipsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -674,6 +770,8 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   capturedConsents?: Prisma.ConsentRecordUncheckedCreateNestedManyWithoutCapturedByInput
@@ -688,6 +786,8 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -712,6 +812,8 @@ export type UserUpdateWithoutMembershipsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capturedConsents?: Prisma.ConsentRecordUpdateManyWithoutCapturedByNestedInput
@@ -726,6 +828,8 @@ export type UserUpdateWithoutMembershipsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -734,6 +838,8 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capturedConsents?: Prisma.ConsentRecordUncheckedUpdateManyWithoutCapturedByNestedInput
@@ -748,6 +854,8 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCapturedConsentsInput = {
@@ -756,6 +864,8 @@ export type UserCreateWithoutCapturedConsentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -770,6 +880,8 @@ export type UserCreateWithoutCapturedConsentsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCapturedConsentsInput = {
@@ -778,6 +890,8 @@ export type UserUncheckedCreateWithoutCapturedConsentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -792,6 +906,8 @@ export type UserUncheckedCreateWithoutCapturedConsentsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCapturedConsentsInput = {
@@ -816,6 +932,8 @@ export type UserUpdateWithoutCapturedConsentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -830,6 +948,8 @@ export type UserUpdateWithoutCapturedConsentsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCapturedConsentsInput = {
@@ -838,6 +958,8 @@ export type UserUncheckedUpdateWithoutCapturedConsentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -852,6 +974,8 @@ export type UserUncheckedUpdateWithoutCapturedConsentsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutRecordedHistoriesInput = {
@@ -860,6 +984,8 @@ export type UserCreateWithoutRecordedHistoriesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -874,6 +1000,8 @@ export type UserCreateWithoutRecordedHistoriesInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutRecordedHistoriesInput = {
@@ -882,6 +1010,8 @@ export type UserUncheckedCreateWithoutRecordedHistoriesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -896,6 +1026,8 @@ export type UserUncheckedCreateWithoutRecordedHistoriesInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutRecordedHistoriesInput = {
@@ -920,6 +1052,8 @@ export type UserUpdateWithoutRecordedHistoriesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -934,6 +1068,8 @@ export type UserUpdateWithoutRecordedHistoriesInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecordedHistoriesInput = {
@@ -942,6 +1078,8 @@ export type UserUncheckedUpdateWithoutRecordedHistoriesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -956,6 +1094,8 @@ export type UserUncheckedUpdateWithoutRecordedHistoriesInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutRecordedMeasurementsInput = {
@@ -964,6 +1104,8 @@ export type UserCreateWithoutRecordedMeasurementsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -978,6 +1120,8 @@ export type UserCreateWithoutRecordedMeasurementsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutRecordedMeasurementsInput = {
@@ -986,6 +1130,8 @@ export type UserUncheckedCreateWithoutRecordedMeasurementsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1000,6 +1146,8 @@ export type UserUncheckedCreateWithoutRecordedMeasurementsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutRecordedMeasurementsInput = {
@@ -1024,6 +1172,8 @@ export type UserUpdateWithoutRecordedMeasurementsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1038,6 +1188,8 @@ export type UserUpdateWithoutRecordedMeasurementsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecordedMeasurementsInput = {
@@ -1046,6 +1198,8 @@ export type UserUncheckedUpdateWithoutRecordedMeasurementsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1060,6 +1214,8 @@ export type UserUncheckedUpdateWithoutRecordedMeasurementsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutUploadedDocumentsInput = {
@@ -1068,6 +1224,8 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1082,6 +1240,8 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
@@ -1090,6 +1250,8 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1104,6 +1266,8 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutUploadedDocumentsInput = {
@@ -1128,6 +1292,8 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1142,6 +1308,8 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
@@ -1150,6 +1318,8 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1164,6 +1334,8 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutClinicianNotesInput = {
@@ -1172,6 +1344,8 @@ export type UserCreateWithoutClinicianNotesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1186,6 +1360,8 @@ export type UserCreateWithoutClinicianNotesInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutClinicianNotesInput = {
@@ -1194,6 +1370,8 @@ export type UserUncheckedCreateWithoutClinicianNotesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1208,6 +1386,8 @@ export type UserUncheckedCreateWithoutClinicianNotesInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutClinicianNotesInput = {
@@ -1232,6 +1412,8 @@ export type UserUpdateWithoutClinicianNotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1246,6 +1428,8 @@ export type UserUpdateWithoutClinicianNotesInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClinicianNotesInput = {
@@ -1254,6 +1438,8 @@ export type UserUncheckedUpdateWithoutClinicianNotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1268,6 +1454,8 @@ export type UserUncheckedUpdateWithoutClinicianNotesInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedExaminationsInput = {
@@ -1276,6 +1464,8 @@ export type UserCreateWithoutCreatedExaminationsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1290,6 +1480,8 @@ export type UserCreateWithoutCreatedExaminationsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedExaminationsInput = {
@@ -1298,6 +1490,8 @@ export type UserUncheckedCreateWithoutCreatedExaminationsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1312,6 +1506,8 @@ export type UserUncheckedCreateWithoutCreatedExaminationsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedExaminationsInput = {
@@ -1336,6 +1532,8 @@ export type UserUpdateWithoutCreatedExaminationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1350,6 +1548,8 @@ export type UserUpdateWithoutCreatedExaminationsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedExaminationsInput = {
@@ -1358,6 +1558,8 @@ export type UserUncheckedUpdateWithoutCreatedExaminationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1372,6 +1574,8 @@ export type UserUncheckedUpdateWithoutCreatedExaminationsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -1380,6 +1584,8 @@ export type UserCreateWithoutReviewsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1394,6 +1600,8 @@ export type UserCreateWithoutReviewsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -1402,6 +1610,8 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1416,6 +1626,8 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -1440,6 +1652,8 @@ export type UserUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1454,6 +1668,8 @@ export type UserUpdateWithoutReviewsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -1462,6 +1678,8 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1476,6 +1694,8 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutReviewAmendmentsInput = {
@@ -1484,6 +1704,8 @@ export type UserCreateWithoutReviewAmendmentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1498,6 +1720,8 @@ export type UserCreateWithoutReviewAmendmentsInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewAmendmentsInput = {
@@ -1506,6 +1730,8 @@ export type UserUncheckedCreateWithoutReviewAmendmentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1520,6 +1746,8 @@ export type UserUncheckedCreateWithoutReviewAmendmentsInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewAmendmentsInput = {
@@ -1544,6 +1772,8 @@ export type UserUpdateWithoutReviewAmendmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1558,6 +1788,8 @@ export type UserUpdateWithoutReviewAmendmentsInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewAmendmentsInput = {
@@ -1566,6 +1798,8 @@ export type UserUncheckedUpdateWithoutReviewAmendmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1580,6 +1814,8 @@ export type UserUncheckedUpdateWithoutReviewAmendmentsInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutDiagnosesInput = {
@@ -1588,6 +1824,8 @@ export type UserCreateWithoutDiagnosesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1602,6 +1840,8 @@ export type UserCreateWithoutDiagnosesInput = {
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutDiagnosesInput = {
@@ -1610,6 +1850,8 @@ export type UserUncheckedCreateWithoutDiagnosesInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1624,6 +1866,8 @@ export type UserUncheckedCreateWithoutDiagnosesInput = {
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutDiagnosesInput = {
@@ -1648,6 +1892,8 @@ export type UserUpdateWithoutDiagnosesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1662,6 +1908,8 @@ export type UserUpdateWithoutDiagnosesInput = {
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiagnosesInput = {
@@ -1670,6 +1918,8 @@ export type UserUncheckedUpdateWithoutDiagnosesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1684,6 +1934,8 @@ export type UserUncheckedUpdateWithoutDiagnosesInput = {
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutTreatmentsInput = {
@@ -1692,6 +1944,8 @@ export type UserCreateWithoutTreatmentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1706,6 +1960,8 @@ export type UserCreateWithoutTreatmentsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisCreateNestedManyWithoutClinicianInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutTreatmentsInput = {
@@ -1714,6 +1970,8 @@ export type UserUncheckedCreateWithoutTreatmentsInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1728,6 +1986,8 @@ export type UserUncheckedCreateWithoutTreatmentsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedCreateNestedManyWithoutClinicianInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutTreatmentsInput = {
@@ -1752,6 +2012,8 @@ export type UserUpdateWithoutTreatmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1766,6 +2028,8 @@ export type UserUpdateWithoutTreatmentsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUpdateManyWithoutClinicianNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTreatmentsInput = {
@@ -1774,6 +2038,8 @@ export type UserUncheckedUpdateWithoutTreatmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1788,6 +2054,8 @@ export type UserUncheckedUpdateWithoutTreatmentsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedUpdateManyWithoutClinicianNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedCarePlansInput = {
@@ -1796,6 +2064,8 @@ export type UserCreateWithoutCreatedCarePlansInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1810,6 +2080,8 @@ export type UserCreateWithoutCreatedCarePlansInput = {
   diagnoses?: Prisma.ClinicianDiagnosisCreateNestedManyWithoutClinicianInput
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedCarePlansInput = {
@@ -1818,6 +2090,8 @@ export type UserUncheckedCreateWithoutCreatedCarePlansInput = {
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1832,6 +2106,8 @@ export type UserUncheckedCreateWithoutCreatedCarePlansInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedCreateNestedManyWithoutClinicianInput
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedCarePlansInput = {
@@ -1856,6 +2132,8 @@ export type UserUpdateWithoutCreatedCarePlansInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1870,6 +2148,8 @@ export type UserUpdateWithoutCreatedCarePlansInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUpdateManyWithoutClinicianNestedInput
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedCarePlansInput = {
@@ -1878,6 +2158,8 @@ export type UserUncheckedUpdateWithoutCreatedCarePlansInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1892,14 +2174,18 @@ export type UserUncheckedUpdateWithoutCreatedCarePlansInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedUpdateManyWithoutClinicianNestedInput
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
-export type UserCreateWithoutAuditEventsInput = {
+export type UserCreateWithoutEducationReportsInput = {
   id?: string
   oidcSubject: string
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
@@ -1914,14 +2200,18 @@ export type UserCreateWithoutAuditEventsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisCreateNestedManyWithoutClinicianInput
   treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
 }
 
-export type UserUncheckedCreateWithoutAuditEventsInput = {
+export type UserUncheckedCreateWithoutEducationReportsInput = {
   id?: string
   oidcSubject: string
   email: string
   displayName: string
   status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1936,6 +2226,248 @@ export type UserUncheckedCreateWithoutAuditEventsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedCreateNestedManyWithoutClinicianInput
   treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
   createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutEducationReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEducationReportsInput, Prisma.UserUncheckedCreateWithoutEducationReportsInput>
+}
+
+export type UserUpsertWithoutEducationReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEducationReportsInput, Prisma.UserUncheckedUpdateWithoutEducationReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEducationReportsInput, Prisma.UserUncheckedCreateWithoutEducationReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEducationReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEducationReportsInput, Prisma.UserUncheckedUpdateWithoutEducationReportsInput>
+}
+
+export type UserUpdateWithoutEducationReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oidcSubject?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
+  capturedConsents?: Prisma.ConsentRecordUpdateManyWithoutCapturedByNestedInput
+  recordedHistories?: Prisma.MedicalHistoryUpdateManyWithoutRecordedByNestedInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUpdateManyWithoutRecordedByNestedInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUpdateManyWithoutUploadedByNestedInput
+  clinicianNotes?: Prisma.ClinicianNoteUpdateManyWithoutAuthorNestedInput
+  createdExaminations?: Prisma.ExaminationUpdateManyWithoutCreatedByNestedInput
+  reviews?: Prisma.ClinicianReviewUpdateManyWithoutReviewerNestedInput
+  reviewAmendments?: Prisma.ReviewAmendmentUpdateManyWithoutAuthorNestedInput
+  diagnoses?: Prisma.ClinicianDiagnosisUpdateManyWithoutClinicianNestedInput
+  treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
+  createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEducationReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oidcSubject?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
+  capturedConsents?: Prisma.ConsentRecordUncheckedUpdateManyWithoutCapturedByNestedInput
+  recordedHistories?: Prisma.MedicalHistoryUncheckedUpdateManyWithoutRecordedByNestedInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUncheckedUpdateManyWithoutRecordedByNestedInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  clinicianNotes?: Prisma.ClinicianNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  createdExaminations?: Prisma.ExaminationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reviews?: Prisma.ClinicianReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewAmendments?: Prisma.ReviewAmendmentUncheckedUpdateManyWithoutAuthorNestedInput
+  diagnoses?: Prisma.ClinicianDiagnosisUncheckedUpdateManyWithoutClinicianNestedInput
+  treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
+  createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutReportSharesInput = {
+  id?: string
+  oidcSubject: string
+  email: string
+  displayName: string
+  status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
+  capturedConsents?: Prisma.ConsentRecordCreateNestedManyWithoutCapturedByInput
+  recordedHistories?: Prisma.MedicalHistoryCreateNestedManyWithoutRecordedByInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementCreateNestedManyWithoutRecordedByInput
+  uploadedDocuments?: Prisma.ClinicalDocumentCreateNestedManyWithoutUploadedByInput
+  clinicianNotes?: Prisma.ClinicianNoteCreateNestedManyWithoutAuthorInput
+  createdExaminations?: Prisma.ExaminationCreateNestedManyWithoutCreatedByInput
+  reviews?: Prisma.ClinicianReviewCreateNestedManyWithoutReviewerInput
+  reviewAmendments?: Prisma.ReviewAmendmentCreateNestedManyWithoutAuthorInput
+  diagnoses?: Prisma.ClinicianDiagnosisCreateNestedManyWithoutClinicianInput
+  treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
+  createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutReportSharesInput = {
+  id?: string
+  oidcSubject: string
+  email: string
+  displayName: string
+  status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
+  capturedConsents?: Prisma.ConsentRecordUncheckedCreateNestedManyWithoutCapturedByInput
+  recordedHistories?: Prisma.MedicalHistoryUncheckedCreateNestedManyWithoutRecordedByInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUncheckedCreateNestedManyWithoutRecordedByInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  clinicianNotes?: Prisma.ClinicianNoteUncheckedCreateNestedManyWithoutAuthorInput
+  createdExaminations?: Prisma.ExaminationUncheckedCreateNestedManyWithoutCreatedByInput
+  reviews?: Prisma.ClinicianReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewAmendments?: Prisma.ReviewAmendmentUncheckedCreateNestedManyWithoutAuthorInput
+  diagnoses?: Prisma.ClinicianDiagnosisUncheckedCreateNestedManyWithoutClinicianInput
+  treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
+  createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutReportSharesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportSharesInput, Prisma.UserUncheckedCreateWithoutReportSharesInput>
+}
+
+export type UserUpsertWithoutReportSharesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportSharesInput, Prisma.UserUncheckedUpdateWithoutReportSharesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportSharesInput, Prisma.UserUncheckedCreateWithoutReportSharesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportSharesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportSharesInput, Prisma.UserUncheckedUpdateWithoutReportSharesInput>
+}
+
+export type UserUpdateWithoutReportSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oidcSubject?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
+  capturedConsents?: Prisma.ConsentRecordUpdateManyWithoutCapturedByNestedInput
+  recordedHistories?: Prisma.MedicalHistoryUpdateManyWithoutRecordedByNestedInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUpdateManyWithoutRecordedByNestedInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUpdateManyWithoutUploadedByNestedInput
+  clinicianNotes?: Prisma.ClinicianNoteUpdateManyWithoutAuthorNestedInput
+  createdExaminations?: Prisma.ExaminationUpdateManyWithoutCreatedByNestedInput
+  reviews?: Prisma.ClinicianReviewUpdateManyWithoutReviewerNestedInput
+  reviewAmendments?: Prisma.ReviewAmendmentUpdateManyWithoutAuthorNestedInput
+  diagnoses?: Prisma.ClinicianDiagnosisUpdateManyWithoutClinicianNestedInput
+  treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
+  createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oidcSubject?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
+  capturedConsents?: Prisma.ConsentRecordUncheckedUpdateManyWithoutCapturedByNestedInput
+  recordedHistories?: Prisma.MedicalHistoryUncheckedUpdateManyWithoutRecordedByNestedInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUncheckedUpdateManyWithoutRecordedByNestedInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  clinicianNotes?: Prisma.ClinicianNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  createdExaminations?: Prisma.ExaminationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reviews?: Prisma.ClinicianReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reviewAmendments?: Prisma.ReviewAmendmentUncheckedUpdateManyWithoutAuthorNestedInput
+  diagnoses?: Prisma.ClinicianDiagnosisUncheckedUpdateManyWithoutClinicianNestedInput
+  treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
+  createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutAuditEventsInput = {
+  id?: string
+  oidcSubject: string
+  email: string
+  displayName: string
+  status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutUserInput
+  capturedConsents?: Prisma.ConsentRecordCreateNestedManyWithoutCapturedByInput
+  recordedHistories?: Prisma.MedicalHistoryCreateNestedManyWithoutRecordedByInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementCreateNestedManyWithoutRecordedByInput
+  uploadedDocuments?: Prisma.ClinicalDocumentCreateNestedManyWithoutUploadedByInput
+  clinicianNotes?: Prisma.ClinicianNoteCreateNestedManyWithoutAuthorInput
+  createdExaminations?: Prisma.ExaminationCreateNestedManyWithoutCreatedByInput
+  reviews?: Prisma.ClinicianReviewCreateNestedManyWithoutReviewerInput
+  reviewAmendments?: Prisma.ReviewAmendmentCreateNestedManyWithoutAuthorInput
+  diagnoses?: Prisma.ClinicianDiagnosisCreateNestedManyWithoutClinicianInput
+  treatments?: Prisma.TreatmentCreateNestedManyWithoutRecordedByInput
+  createdCarePlans?: Prisma.CarePlanCreateNestedManyWithoutCreatedByInput
+  educationReports?: Prisma.PatientEducationCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutAuditEventsInput = {
+  id?: string
+  oidcSubject: string
+  email: string
+  displayName: string
+  status?: $Enums.UserStatus
+  passwordHash?: string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutUserInput
+  capturedConsents?: Prisma.ConsentRecordUncheckedCreateNestedManyWithoutCapturedByInput
+  recordedHistories?: Prisma.MedicalHistoryUncheckedCreateNestedManyWithoutRecordedByInput
+  recordedMeasurements?: Prisma.ClinicalMeasurementUncheckedCreateNestedManyWithoutRecordedByInput
+  uploadedDocuments?: Prisma.ClinicalDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  clinicianNotes?: Prisma.ClinicianNoteUncheckedCreateNestedManyWithoutAuthorInput
+  createdExaminations?: Prisma.ExaminationUncheckedCreateNestedManyWithoutCreatedByInput
+  reviews?: Prisma.ClinicianReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reviewAmendments?: Prisma.ReviewAmendmentUncheckedCreateNestedManyWithoutAuthorInput
+  diagnoses?: Prisma.ClinicianDiagnosisUncheckedCreateNestedManyWithoutClinicianInput
+  treatments?: Prisma.TreatmentUncheckedCreateNestedManyWithoutRecordedByInput
+  createdCarePlans?: Prisma.CarePlanUncheckedCreateNestedManyWithoutCreatedByInput
+  educationReports?: Prisma.PatientEducationUncheckedCreateNestedManyWithoutCreatedByInput
+  reportShares?: Prisma.ReportShareUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutAuditEventsInput = {
@@ -1960,6 +2492,8 @@ export type UserUpdateWithoutAuditEventsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutUserNestedInput
@@ -1974,6 +2508,8 @@ export type UserUpdateWithoutAuditEventsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUpdateManyWithoutClinicianNestedInput
   treatments?: Prisma.TreatmentUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUpdateManyWithoutCreatedByNestedInput
+  educationReports?: Prisma.PatientEducationUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditEventsInput = {
@@ -1982,6 +2518,8 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1996,6 +2534,8 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   diagnoses?: Prisma.ClinicianDiagnosisUncheckedUpdateManyWithoutClinicianNestedInput
   treatments?: Prisma.TreatmentUncheckedUpdateManyWithoutRecordedByNestedInput
   createdCarePlans?: Prisma.CarePlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  educationReports?: Prisma.PatientEducationUncheckedUpdateManyWithoutCreatedByNestedInput
+  reportShares?: Prisma.ReportShareUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 
@@ -2017,6 +2557,8 @@ export type UserCountOutputType = {
   treatments: number
   createdCarePlans: number
   auditEvents: number
+  educationReports: number
+  reportShares: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2033,6 +2575,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   treatments?: boolean | UserCountOutputTypeCountTreatmentsArgs
   createdCarePlans?: boolean | UserCountOutputTypeCountCreatedCarePlansArgs
   auditEvents?: boolean | UserCountOutputTypeCountAuditEventsArgs
+  educationReports?: boolean | UserCountOutputTypeCountEducationReportsArgs
+  reportShares?: boolean | UserCountOutputTypeCountReportSharesArgs
 }
 
 /**
@@ -2136,6 +2680,20 @@ export type UserCountOutputTypeCountAuditEventsArgs<ExtArgs extends runtime.Type
   where?: Prisma.AuditEventWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEducationReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PatientEducationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportShareWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2143,6 +2701,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   displayName?: boolean
   status?: boolean
+  passwordHash?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
@@ -2158,6 +2718,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   treatments?: boolean | Prisma.User$treatmentsArgs<ExtArgs>
   createdCarePlans?: boolean | Prisma.User$createdCarePlansArgs<ExtArgs>
   auditEvents?: boolean | Prisma.User$auditEventsArgs<ExtArgs>
+  educationReports?: boolean | Prisma.User$educationReportsArgs<ExtArgs>
+  reportShares?: boolean | Prisma.User$reportSharesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2167,6 +2729,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   displayName?: boolean
   status?: boolean
+  passwordHash?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -2177,6 +2741,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   displayName?: boolean
   status?: boolean
+  passwordHash?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -2187,11 +2753,13 @@ export type UserSelectScalar = {
   email?: boolean
   displayName?: boolean
   status?: boolean
+  passwordHash?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "oidcSubject" | "email" | "displayName" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "oidcSubject" | "email" | "displayName" | "status" | "passwordHash" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   capturedConsents?: boolean | Prisma.User$capturedConsentsArgs<ExtArgs>
@@ -2206,6 +2774,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   treatments?: boolean | Prisma.User$treatmentsArgs<ExtArgs>
   createdCarePlans?: boolean | Prisma.User$createdCarePlansArgs<ExtArgs>
   auditEvents?: boolean | Prisma.User$auditEventsArgs<ExtArgs>
+  educationReports?: boolean | Prisma.User$educationReportsArgs<ExtArgs>
+  reportShares?: boolean | Prisma.User$reportSharesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2227,6 +2797,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     treatments: Prisma.$TreatmentPayload<ExtArgs>[]
     createdCarePlans: Prisma.$CarePlanPayload<ExtArgs>[]
     auditEvents: Prisma.$AuditEventPayload<ExtArgs>[]
+    educationReports: Prisma.$PatientEducationPayload<ExtArgs>[]
+    reportShares: Prisma.$ReportSharePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2234,6 +2806,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     displayName: string
     status: $Enums.UserStatus
+    passwordHash: string | null
+    lastLoginAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -2643,6 +3217,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   treatments<T extends Prisma.User$treatmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$treatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdCarePlans<T extends Prisma.User$createdCarePlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCarePlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarePlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditEvents<T extends Prisma.User$auditEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  educationReports<T extends Prisma.User$educationReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$educationReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PatientEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reportShares<T extends Prisma.User$reportSharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportSharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2677,6 +3253,8 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly displayName: Prisma.FieldRef<"User", 'String'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
+  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
+  readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -3381,6 +3959,54 @@ export type User$auditEventsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.AuditEventScalarFieldEnum | Prisma.AuditEventScalarFieldEnum[]
+}
+
+/**
+ * User.educationReports
+ */
+export type User$educationReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PatientEducation
+   */
+  select?: Prisma.PatientEducationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PatientEducation
+   */
+  omit?: Prisma.PatientEducationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PatientEducationInclude<ExtArgs> | null
+  where?: Prisma.PatientEducationWhereInput
+  orderBy?: Prisma.PatientEducationOrderByWithRelationInput | Prisma.PatientEducationOrderByWithRelationInput[]
+  cursor?: Prisma.PatientEducationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PatientEducationScalarFieldEnum | Prisma.PatientEducationScalarFieldEnum[]
+}
+
+/**
+ * User.reportShares
+ */
+export type User$reportSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportShare
+   */
+  select?: Prisma.ReportShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportShare
+   */
+  omit?: Prisma.ReportShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportShareInclude<ExtArgs> | null
+  where?: Prisma.ReportShareWhereInput
+  orderBy?: Prisma.ReportShareOrderByWithRelationInput | Prisma.ReportShareOrderByWithRelationInput[]
+  cursor?: Prisma.ReportShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportShareScalarFieldEnum | Prisma.ReportShareScalarFieldEnum[]
 }
 
 /**

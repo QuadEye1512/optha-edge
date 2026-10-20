@@ -437,6 +437,8 @@ export const ModelName = {
   MedicalSource: 'MedicalSource',
   ArticleSource: 'ArticleSource',
   MedicalContentReview: 'MedicalContentReview',
+  PatientEducation: 'PatientEducation',
+  ReportShare: 'ReportShare',
   AuditEvent: 'AuditEvent'
 } as const
 
@@ -453,7 +455,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "role" | "permission" | "rolePermission" | "organizationMembership" | "patient" | "patientDemographics" | "patientIdentifier" | "patientContact" | "consentRecord" | "medicalHistory" | "riskFactor" | "clinicalMeasurement" | "medication" | "allergy" | "ocularHistory" | "clinicalDocument" | "clinicianNote" | "examination" | "eyeImage" | "imageQualityAssessment" | "modelVersion" | "prediction" | "predictionProbability" | "lesionFinding" | "explainabilityAsset" | "clinicianReview" | "reviewAmendment" | "clinicianDiagnosis" | "referral" | "treatment" | "carePlan" | "followUp" | "appointment" | "educationalArticle" | "articleVersion" | "medicalSource" | "articleSource" | "medicalContentReview" | "auditEvent"
+    modelProps: "organization" | "user" | "role" | "permission" | "rolePermission" | "organizationMembership" | "patient" | "patientDemographics" | "patientIdentifier" | "patientContact" | "consentRecord" | "medicalHistory" | "riskFactor" | "clinicalMeasurement" | "medication" | "allergy" | "ocularHistory" | "clinicalDocument" | "clinicianNote" | "examination" | "eyeImage" | "imageQualityAssessment" | "modelVersion" | "prediction" | "predictionProbability" | "lesionFinding" | "explainabilityAsset" | "clinicianReview" | "reviewAmendment" | "clinicianDiagnosis" | "referral" | "treatment" | "carePlan" | "followUp" | "appointment" | "educationalArticle" | "articleVersion" | "medicalSource" | "articleSource" | "medicalContentReview" | "patientEducation" | "reportShare" | "auditEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3417,6 +3419,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PatientEducation: {
+      payload: Prisma.$PatientEducationPayload<ExtArgs>
+      fields: Prisma.PatientEducationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PatientEducationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PatientEducationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        findFirst: {
+          args: Prisma.PatientEducationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PatientEducationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        findMany: {
+          args: Prisma.PatientEducationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>[]
+        }
+        create: {
+          args: Prisma.PatientEducationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        createMany: {
+          args: Prisma.PatientEducationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PatientEducationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>[]
+        }
+        delete: {
+          args: Prisma.PatientEducationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        update: {
+          args: Prisma.PatientEducationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        deleteMany: {
+          args: Prisma.PatientEducationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PatientEducationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PatientEducationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>[]
+        }
+        upsert: {
+          args: Prisma.PatientEducationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PatientEducationPayload>
+        }
+        aggregate: {
+          args: Prisma.PatientEducationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePatientEducation>
+        }
+        groupBy: {
+          args: Prisma.PatientEducationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PatientEducationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PatientEducationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PatientEducationCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReportShare: {
+      payload: Prisma.$ReportSharePayload<ExtArgs>
+      fields: Prisma.ReportShareFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportShareFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportShareFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        findFirst: {
+          args: Prisma.ReportShareFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportShareFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        findMany: {
+          args: Prisma.ReportShareFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>[]
+        }
+        create: {
+          args: Prisma.ReportShareCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        createMany: {
+          args: Prisma.ReportShareCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReportShareCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>[]
+        }
+        delete: {
+          args: Prisma.ReportShareDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        update: {
+          args: Prisma.ReportShareUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportShareDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportShareUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReportShareUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>[]
+        }
+        upsert: {
+          args: Prisma.ReportShareUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportSharePayload>
+        }
+        aggregate: {
+          args: Prisma.ReportShareAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReportShare>
+        }
+        groupBy: {
+          args: Prisma.ReportShareGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportShareGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReportShareCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportShareCountAggregateOutputType> | number
+        }
+      }
+    }
     AuditEvent: {
       payload: Prisma.$AuditEventPayload<ExtArgs>
       fields: Prisma.AuditEventFieldRefs
@@ -3549,6 +3699,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   displayName: 'displayName',
   status: 'status',
+  passwordHash: 'passwordHash',
+  lastLoginAt: 'lastLoginAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3797,6 +3949,7 @@ export const EyeImageScalarFieldEnum = {
   examinationId: 'examinationId',
   eye: 'eye',
   storageKey: 'storageKey',
+  modelInputStorageKey: 'modelInputStorageKey',
   sha256: 'sha256',
   mimeType: 'mimeType',
   width: 'width',
@@ -3911,6 +4064,7 @@ export const ClinicianReviewScalarFieldEnum = {
   predictionId: 'predictionId',
   reviewerId: 'reviewerId',
   decision: 'decision',
+  confirmedGrade: 'confirmedGrade',
   assessment: 'assessment',
   referralUrgency: 'referralUrgency',
   referralReason: 'referralReason',
@@ -4004,6 +4158,7 @@ export const FollowUpScalarFieldEnum = {
   organizationId: 'organizationId',
   patientId: 'patientId',
   carePlanId: 'carePlanId',
+  examinationId: 'examinationId',
   status: 'status',
   dueAt: 'dueAt',
   completedAt: 'completedAt',
@@ -4084,6 +4239,40 @@ export const MedicalContentReviewScalarFieldEnum = {
 } as const
 
 export type MedicalContentReviewScalarFieldEnum = (typeof MedicalContentReviewScalarFieldEnum)[keyof typeof MedicalContentReviewScalarFieldEnum]
+
+
+export const PatientEducationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  patientId: 'patientId',
+  examinationId: 'examinationId',
+  grade: 'grade',
+  gradeSource: 'gradeSource',
+  language: 'language',
+  content: 'content',
+  generator: 'generator',
+  promptVersion: 'promptVersion',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type PatientEducationScalarFieldEnum = (typeof PatientEducationScalarFieldEnum)[keyof typeof PatientEducationScalarFieldEnum]
+
+
+export const ReportShareScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  examinationId: 'examinationId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  lastViewedAt: 'lastViewedAt',
+  viewCount: 'viewCount',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportShareScalarFieldEnum = (typeof ReportShareScalarFieldEnum)[keyof typeof ReportShareScalarFieldEnum]
 
 
 export const AuditEventScalarFieldEnum = {
@@ -4759,6 +4948,8 @@ export type GlobalOmitConfig = {
   medicalSource?: Prisma.MedicalSourceOmit
   articleSource?: Prisma.ArticleSourceOmit
   medicalContentReview?: Prisma.MedicalContentReviewOmit
+  patientEducation?: Prisma.PatientEducationOmit
+  reportShare?: Prisma.ReportShareOmit
   auditEvent?: Prisma.AuditEventOmit
 }
 

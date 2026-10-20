@@ -154,7 +154,7 @@ export type LesionFinding = Prisma.LesionFindingModel
 export type ExplainabilityAsset = Prisma.ExplainabilityAssetModel
 /**
  * Model ClinicianReview
- * Deferred Review Queue data model. Retained to avoid destructive schema changes.
+ * 
  */
 export type ClinicianReview = Prisma.ClinicianReviewModel
 /**
@@ -184,7 +184,7 @@ export type Treatment = Prisma.TreatmentModel
 export type CarePlan = Prisma.CarePlanModel
 /**
  * Model FollowUp
- * Deferred Follow-ups data model. Retained to avoid destructive schema changes.
+ * 
  */
 export type FollowUp = Prisma.FollowUpModel
 /**
@@ -217,6 +217,17 @@ export type ArticleSource = Prisma.ArticleSourceModel
  * 
  */
 export type MedicalContentReview = Prisma.MedicalContentReviewModel
+/**
+ * Model PatientEducation
+ * AI-generated patient education (disease explanation, diet and natural
+ * remedies) for one examination. Immutable; regenerating creates a new row.
+ */
+export type PatientEducation = Prisma.PatientEducationModel
+/**
+ * Model ReportShare
+ * Time-limited read-only link that lets a patient open their report on a phone.
+ */
+export type ReportShare = Prisma.ReportShareModel
 /**
  * Model AuditEvent
  * 

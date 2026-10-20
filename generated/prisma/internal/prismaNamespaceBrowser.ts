@@ -91,6 +91,8 @@ export const ModelName = {
   MedicalSource: 'MedicalSource',
   ArticleSource: 'ArticleSource',
   MedicalContentReview: 'MedicalContentReview',
+  PatientEducation: 'PatientEducation',
+  ReportShare: 'ReportShare',
   AuditEvent: 'AuditEvent'
 } as const
 
@@ -129,6 +131,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   displayName: 'displayName',
   status: 'status',
+  passwordHash: 'passwordHash',
+  lastLoginAt: 'lastLoginAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -377,6 +381,7 @@ export const EyeImageScalarFieldEnum = {
   examinationId: 'examinationId',
   eye: 'eye',
   storageKey: 'storageKey',
+  modelInputStorageKey: 'modelInputStorageKey',
   sha256: 'sha256',
   mimeType: 'mimeType',
   width: 'width',
@@ -491,6 +496,7 @@ export const ClinicianReviewScalarFieldEnum = {
   predictionId: 'predictionId',
   reviewerId: 'reviewerId',
   decision: 'decision',
+  confirmedGrade: 'confirmedGrade',
   assessment: 'assessment',
   referralUrgency: 'referralUrgency',
   referralReason: 'referralReason',
@@ -584,6 +590,7 @@ export const FollowUpScalarFieldEnum = {
   organizationId: 'organizationId',
   patientId: 'patientId',
   carePlanId: 'carePlanId',
+  examinationId: 'examinationId',
   status: 'status',
   dueAt: 'dueAt',
   completedAt: 'completedAt',
@@ -664,6 +671,40 @@ export const MedicalContentReviewScalarFieldEnum = {
 } as const
 
 export type MedicalContentReviewScalarFieldEnum = (typeof MedicalContentReviewScalarFieldEnum)[keyof typeof MedicalContentReviewScalarFieldEnum]
+
+
+export const PatientEducationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  patientId: 'patientId',
+  examinationId: 'examinationId',
+  grade: 'grade',
+  gradeSource: 'gradeSource',
+  language: 'language',
+  content: 'content',
+  generator: 'generator',
+  promptVersion: 'promptVersion',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type PatientEducationScalarFieldEnum = (typeof PatientEducationScalarFieldEnum)[keyof typeof PatientEducationScalarFieldEnum]
+
+
+export const ReportShareScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  examinationId: 'examinationId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  lastViewedAt: 'lastViewedAt',
+  viewCount: 'viewCount',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportShareScalarFieldEnum = (typeof ReportShareScalarFieldEnum)[keyof typeof ReportShareScalarFieldEnum]
 
 
 export const AuditEventScalarFieldEnum = {

@@ -32,6 +32,18 @@ export function isSyntheticAuthEnabled(): boolean {
     && process.env.ENABLE_SYNTHETIC_AUTH === 'true';
 }
 
+/**
+ * Browsers drop `Secure` cookies on plain-HTTP origins other than localhost.
+ * A phone on the clinic Wi-Fi reaching the Pi over http://<pi-ip>:3000 needs
+ * SESSION_COOKIE_SECURE=false; set it to true once HTTPS is in front of the app.
+ */
+function cookieSecure(): boolean {
+  const configured = process.env.SESSION_COOKIE_SECURE?.trim().toLowerCase();
+  if (configured === 'true') return true;
+  if (configured === 'false') return false;
+  return process.env.NODE_ENV === 'production';
+}
+
 export async function createSession(claims: SessionClaims): Promise<void> {
   const expiresAt = new Date(Date.now() + SESSION_DURATION_SECONDS * 1000);
   const token = await new SignJWT(claims)
@@ -47,7 +59,7 @@ export async function createSession(claims: SessionClaims): Promise<void> {
   (await cookies()).set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    secure: cookieSecure(),
     path: '/',
     expires: expiresAt,
     priority: 'high',

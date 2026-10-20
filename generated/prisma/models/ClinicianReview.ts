@@ -14,14 +14,24 @@ import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model ClinicianReview
- * Deferred Review Queue data model. Retained to avoid destructive schema changes.
+ * 
  */
 export type ClinicianReviewModel = runtime.Types.Result.DefaultSelection<Prisma.$ClinicianReviewPayload>
 
 export type AggregateClinicianReview = {
   _count: ClinicianReviewCountAggregateOutputType | null
+  _avg: ClinicianReviewAvgAggregateOutputType | null
+  _sum: ClinicianReviewSumAggregateOutputType | null
   _min: ClinicianReviewMinAggregateOutputType | null
   _max: ClinicianReviewMaxAggregateOutputType | null
+}
+
+export type ClinicianReviewAvgAggregateOutputType = {
+  confirmedGrade: number | null
+}
+
+export type ClinicianReviewSumAggregateOutputType = {
+  confirmedGrade: number | null
 }
 
 export type ClinicianReviewMinAggregateOutputType = {
@@ -31,6 +41,7 @@ export type ClinicianReviewMinAggregateOutputType = {
   predictionId: string | null
   reviewerId: string | null
   decision: $Enums.ReviewDecision | null
+  confirmedGrade: number | null
   assessment: string | null
   referralUrgency: $Enums.ReferralUrgency | null
   referralReason: string | null
@@ -48,6 +59,7 @@ export type ClinicianReviewMaxAggregateOutputType = {
   predictionId: string | null
   reviewerId: string | null
   decision: $Enums.ReviewDecision | null
+  confirmedGrade: number | null
   assessment: string | null
   referralUrgency: $Enums.ReferralUrgency | null
   referralReason: string | null
@@ -65,6 +77,7 @@ export type ClinicianReviewCountAggregateOutputType = {
   predictionId: number
   reviewerId: number
   decision: number
+  confirmedGrade: number
   assessment: number
   referralUrgency: number
   referralReason: number
@@ -77,6 +90,14 @@ export type ClinicianReviewCountAggregateOutputType = {
 }
 
 
+export type ClinicianReviewAvgAggregateInputType = {
+  confirmedGrade?: true
+}
+
+export type ClinicianReviewSumAggregateInputType = {
+  confirmedGrade?: true
+}
+
 export type ClinicianReviewMinAggregateInputType = {
   id?: true
   organizationId?: true
@@ -84,6 +105,7 @@ export type ClinicianReviewMinAggregateInputType = {
   predictionId?: true
   reviewerId?: true
   decision?: true
+  confirmedGrade?: true
   assessment?: true
   referralUrgency?: true
   referralReason?: true
@@ -101,6 +123,7 @@ export type ClinicianReviewMaxAggregateInputType = {
   predictionId?: true
   reviewerId?: true
   decision?: true
+  confirmedGrade?: true
   assessment?: true
   referralUrgency?: true
   referralReason?: true
@@ -118,6 +141,7 @@ export type ClinicianReviewCountAggregateInputType = {
   predictionId?: true
   reviewerId?: true
   decision?: true
+  confirmedGrade?: true
   assessment?: true
   referralUrgency?: true
   referralReason?: true
@@ -167,6 +191,18 @@ export type ClinicianReviewAggregateArgs<ExtArgs extends runtime.Types.Extension
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ClinicianReviewAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ClinicianReviewSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ClinicianReviewMinAggregateInputType
@@ -197,6 +233,8 @@ export type ClinicianReviewGroupByArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   _count?: ClinicianReviewCountAggregateInputType | true
+  _avg?: ClinicianReviewAvgAggregateInputType
+  _sum?: ClinicianReviewSumAggregateInputType
   _min?: ClinicianReviewMinAggregateInputType
   _max?: ClinicianReviewMaxAggregateInputType
 }
@@ -208,6 +246,7 @@ export type ClinicianReviewGroupByOutputType = {
   predictionId: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade: number | null
   assessment: string
   referralUrgency: $Enums.ReferralUrgency
   referralReason: string | null
@@ -217,6 +256,8 @@ export type ClinicianReviewGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: ClinicianReviewCountAggregateOutputType | null
+  _avg: ClinicianReviewAvgAggregateOutputType | null
+  _sum: ClinicianReviewSumAggregateOutputType | null
   _min: ClinicianReviewMinAggregateOutputType | null
   _max: ClinicianReviewMaxAggregateOutputType | null
 }
@@ -246,6 +287,7 @@ export type ClinicianReviewWhereInput = {
   predictionId?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
   reviewerId?: Prisma.StringFilter<"ClinicianReview"> | string
   decision?: Prisma.EnumReviewDecisionFilter<"ClinicianReview"> | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.IntNullableFilter<"ClinicianReview"> | number | null
   assessment?: Prisma.StringFilter<"ClinicianReview"> | string
   referralUrgency?: Prisma.EnumReferralUrgencyFilter<"ClinicianReview"> | $Enums.ReferralUrgency
   referralReason?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
@@ -270,6 +312,7 @@ export type ClinicianReviewOrderByWithRelationInput = {
   predictionId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   decision?: Prisma.SortOrder
+  confirmedGrade?: Prisma.SortOrderInput | Prisma.SortOrder
   assessment?: Prisma.SortOrder
   referralUrgency?: Prisma.SortOrder
   referralReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -297,6 +340,7 @@ export type ClinicianReviewWhereUniqueInput = Prisma.AtLeast<{
   predictionId?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
   reviewerId?: Prisma.StringFilter<"ClinicianReview"> | string
   decision?: Prisma.EnumReviewDecisionFilter<"ClinicianReview"> | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.IntNullableFilter<"ClinicianReview"> | number | null
   assessment?: Prisma.StringFilter<"ClinicianReview"> | string
   referralUrgency?: Prisma.EnumReferralUrgencyFilter<"ClinicianReview"> | $Enums.ReferralUrgency
   referralReason?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
@@ -321,6 +365,7 @@ export type ClinicianReviewOrderByWithAggregationInput = {
   predictionId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   decision?: Prisma.SortOrder
+  confirmedGrade?: Prisma.SortOrderInput | Prisma.SortOrder
   assessment?: Prisma.SortOrder
   referralUrgency?: Prisma.SortOrder
   referralReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -330,8 +375,10 @@ export type ClinicianReviewOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ClinicianReviewCountOrderByAggregateInput
+  _avg?: Prisma.ClinicianReviewAvgOrderByAggregateInput
   _max?: Prisma.ClinicianReviewMaxOrderByAggregateInput
   _min?: Prisma.ClinicianReviewMinOrderByAggregateInput
+  _sum?: Prisma.ClinicianReviewSumOrderByAggregateInput
 }
 
 export type ClinicianReviewScalarWhereWithAggregatesInput = {
@@ -344,6 +391,7 @@ export type ClinicianReviewScalarWhereWithAggregatesInput = {
   predictionId?: Prisma.StringNullableWithAggregatesFilter<"ClinicianReview"> | string | null
   reviewerId?: Prisma.StringWithAggregatesFilter<"ClinicianReview"> | string
   decision?: Prisma.EnumReviewDecisionWithAggregatesFilter<"ClinicianReview"> | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.IntNullableWithAggregatesFilter<"ClinicianReview"> | number | null
   assessment?: Prisma.StringWithAggregatesFilter<"ClinicianReview"> | string
   referralUrgency?: Prisma.EnumReferralUrgencyWithAggregatesFilter<"ClinicianReview"> | $Enums.ReferralUrgency
   referralReason?: Prisma.StringNullableWithAggregatesFilter<"ClinicianReview"> | string | null
@@ -357,6 +405,7 @@ export type ClinicianReviewScalarWhereWithAggregatesInput = {
 export type ClinicianReviewCreateInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -381,6 +430,7 @@ export type ClinicianReviewUncheckedCreateInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -397,6 +447,7 @@ export type ClinicianReviewUncheckedCreateInput = {
 export type ClinicianReviewUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -421,6 +472,7 @@ export type ClinicianReviewUncheckedUpdateInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -441,6 +493,7 @@ export type ClinicianReviewCreateManyInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -454,6 +507,7 @@ export type ClinicianReviewCreateManyInput = {
 export type ClinicianReviewUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -471,6 +525,7 @@ export type ClinicianReviewUncheckedUpdateManyInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -498,6 +553,7 @@ export type ClinicianReviewCountOrderByAggregateInput = {
   predictionId?: Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   decision?: Prisma.SortOrder
+  confirmedGrade?: Prisma.SortOrder
   assessment?: Prisma.SortOrder
   referralUrgency?: Prisma.SortOrder
   referralReason?: Prisma.SortOrder
@@ -508,6 +564,10 @@ export type ClinicianReviewCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type ClinicianReviewAvgOrderByAggregateInput = {
+  confirmedGrade?: Prisma.SortOrder
+}
+
 export type ClinicianReviewMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
@@ -515,6 +575,7 @@ export type ClinicianReviewMaxOrderByAggregateInput = {
   predictionId?: Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   decision?: Prisma.SortOrder
+  confirmedGrade?: Prisma.SortOrder
   assessment?: Prisma.SortOrder
   referralUrgency?: Prisma.SortOrder
   referralReason?: Prisma.SortOrder
@@ -532,6 +593,7 @@ export type ClinicianReviewMinOrderByAggregateInput = {
   predictionId?: Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   decision?: Prisma.SortOrder
+  confirmedGrade?: Prisma.SortOrder
   assessment?: Prisma.SortOrder
   referralUrgency?: Prisma.SortOrder
   referralReason?: Prisma.SortOrder
@@ -540,6 +602,10 @@ export type ClinicianReviewMinOrderByAggregateInput = {
   lockedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ClinicianReviewSumOrderByAggregateInput = {
+  confirmedGrade?: Prisma.SortOrder
 }
 
 export type ClinicianReviewScalarRelationFilter = {
@@ -724,6 +790,14 @@ export type EnumReviewDecisionFieldUpdateOperationsInput = {
   set?: $Enums.ReviewDecision
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type EnumReferralUrgencyFieldUpdateOperationsInput = {
   set?: $Enums.ReferralUrgency
 }
@@ -777,6 +851,7 @@ export type ClinicianReviewUpdateOneWithoutReferralsNestedInput = {
 export type ClinicianReviewCreateWithoutOrganizationInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -799,6 +874,7 @@ export type ClinicianReviewUncheckedCreateWithoutOrganizationInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -848,6 +924,7 @@ export type ClinicianReviewScalarWhereInput = {
   predictionId?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
   reviewerId?: Prisma.StringFilter<"ClinicianReview"> | string
   decision?: Prisma.EnumReviewDecisionFilter<"ClinicianReview"> | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.IntNullableFilter<"ClinicianReview"> | number | null
   assessment?: Prisma.StringFilter<"ClinicianReview"> | string
   referralUrgency?: Prisma.EnumReferralUrgencyFilter<"ClinicianReview"> | $Enums.ReferralUrgency
   referralReason?: Prisma.StringNullableFilter<"ClinicianReview"> | string | null
@@ -861,6 +938,7 @@ export type ClinicianReviewScalarWhereInput = {
 export type ClinicianReviewCreateWithoutReviewerInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -883,6 +961,7 @@ export type ClinicianReviewUncheckedCreateWithoutReviewerInput = {
   examinationId: string
   predictionId?: string | null
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -925,6 +1004,7 @@ export type ClinicianReviewUpdateManyWithWhereWithoutReviewerInput = {
 export type ClinicianReviewCreateWithoutExaminationInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -947,6 +1027,7 @@ export type ClinicianReviewUncheckedCreateWithoutExaminationInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -989,6 +1070,7 @@ export type ClinicianReviewUpdateManyWithWhereWithoutExaminationInput = {
 export type ClinicianReviewCreateWithoutPredictionInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1011,6 +1093,7 @@ export type ClinicianReviewUncheckedCreateWithoutPredictionInput = {
   examinationId: string
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1053,6 +1136,7 @@ export type ClinicianReviewUpdateManyWithWhereWithoutPredictionInput = {
 export type ClinicianReviewCreateWithoutAmendmentsInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1076,6 +1160,7 @@ export type ClinicianReviewUncheckedCreateWithoutAmendmentsInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1107,6 +1192,7 @@ export type ClinicianReviewUpdateToOneWithWhereWithoutAmendmentsInput = {
 export type ClinicianReviewUpdateWithoutAmendmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1130,6 +1216,7 @@ export type ClinicianReviewUncheckedUpdateWithoutAmendmentsInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1145,6 +1232,7 @@ export type ClinicianReviewUncheckedUpdateWithoutAmendmentsInput = {
 export type ClinicianReviewCreateWithoutDiagnosesInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1168,6 +1256,7 @@ export type ClinicianReviewUncheckedCreateWithoutDiagnosesInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1199,6 +1288,7 @@ export type ClinicianReviewUpdateToOneWithWhereWithoutDiagnosesInput = {
 export type ClinicianReviewUpdateWithoutDiagnosesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1222,6 +1312,7 @@ export type ClinicianReviewUncheckedUpdateWithoutDiagnosesInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1237,6 +1328,7 @@ export type ClinicianReviewUncheckedUpdateWithoutDiagnosesInput = {
 export type ClinicianReviewCreateWithoutReferralsInput = {
   id?: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1260,6 +1352,7 @@ export type ClinicianReviewUncheckedCreateWithoutReferralsInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1291,6 +1384,7 @@ export type ClinicianReviewUpdateToOneWithWhereWithoutReferralsInput = {
 export type ClinicianReviewUpdateWithoutReferralsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1314,6 +1408,7 @@ export type ClinicianReviewUncheckedUpdateWithoutReferralsInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1332,6 +1427,7 @@ export type ClinicianReviewCreateManyOrganizationInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1345,6 +1441,7 @@ export type ClinicianReviewCreateManyOrganizationInput = {
 export type ClinicianReviewUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1367,6 +1464,7 @@ export type ClinicianReviewUncheckedUpdateWithoutOrganizationInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1386,6 +1484,7 @@ export type ClinicianReviewUncheckedUpdateManyWithoutOrganizationInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1402,6 +1501,7 @@ export type ClinicianReviewCreateManyReviewerInput = {
   examinationId: string
   predictionId?: string | null
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1415,6 +1515,7 @@ export type ClinicianReviewCreateManyReviewerInput = {
 export type ClinicianReviewUpdateWithoutReviewerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1437,6 +1538,7 @@ export type ClinicianReviewUncheckedUpdateWithoutReviewerInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1456,6 +1558,7 @@ export type ClinicianReviewUncheckedUpdateManyWithoutReviewerInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1472,6 +1575,7 @@ export type ClinicianReviewCreateManyExaminationInput = {
   predictionId?: string | null
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1485,6 +1589,7 @@ export type ClinicianReviewCreateManyExaminationInput = {
 export type ClinicianReviewUpdateWithoutExaminationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1507,6 +1612,7 @@ export type ClinicianReviewUncheckedUpdateWithoutExaminationInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1526,6 +1632,7 @@ export type ClinicianReviewUncheckedUpdateManyWithoutExaminationInput = {
   predictionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1542,6 +1649,7 @@ export type ClinicianReviewCreateManyPredictionInput = {
   examinationId: string
   reviewerId: string
   decision: $Enums.ReviewDecision
+  confirmedGrade?: number | null
   assessment: string
   referralUrgency?: $Enums.ReferralUrgency
   referralReason?: string | null
@@ -1555,6 +1663,7 @@ export type ClinicianReviewCreateManyPredictionInput = {
 export type ClinicianReviewUpdateWithoutPredictionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1577,6 +1686,7 @@ export type ClinicianReviewUncheckedUpdateWithoutPredictionInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1596,6 +1706,7 @@ export type ClinicianReviewUncheckedUpdateManyWithoutPredictionInput = {
   examinationId?: Prisma.StringFieldUpdateOperationsInput | string
   reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
   decision?: Prisma.EnumReviewDecisionFieldUpdateOperationsInput | $Enums.ReviewDecision
+  confirmedGrade?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assessment?: Prisma.StringFieldUpdateOperationsInput | string
   referralUrgency?: Prisma.EnumReferralUrgencyFieldUpdateOperationsInput | $Enums.ReferralUrgency
   referralReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1662,6 +1773,7 @@ export type ClinicianReviewSelect<ExtArgs extends runtime.Types.Extensions.Inter
   predictionId?: boolean
   reviewerId?: boolean
   decision?: boolean
+  confirmedGrade?: boolean
   assessment?: boolean
   referralUrgency?: boolean
   referralReason?: boolean
@@ -1687,6 +1799,7 @@ export type ClinicianReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   predictionId?: boolean
   reviewerId?: boolean
   decision?: boolean
+  confirmedGrade?: boolean
   assessment?: boolean
   referralUrgency?: boolean
   referralReason?: boolean
@@ -1708,6 +1821,7 @@ export type ClinicianReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   predictionId?: boolean
   reviewerId?: boolean
   decision?: boolean
+  confirmedGrade?: boolean
   assessment?: boolean
   referralUrgency?: boolean
   referralReason?: boolean
@@ -1729,6 +1843,7 @@ export type ClinicianReviewSelectScalar = {
   predictionId?: boolean
   reviewerId?: boolean
   decision?: boolean
+  confirmedGrade?: boolean
   assessment?: boolean
   referralUrgency?: boolean
   referralReason?: boolean
@@ -1739,7 +1854,7 @@ export type ClinicianReviewSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ClinicianReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "examinationId" | "predictionId" | "reviewerId" | "decision" | "assessment" | "referralUrgency" | "referralReason" | "repeatImagingReason" | "signedAt" | "lockedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["clinicianReview"]>
+export type ClinicianReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "examinationId" | "predictionId" | "reviewerId" | "decision" | "confirmedGrade" | "assessment" | "referralUrgency" | "referralReason" | "repeatImagingReason" | "signedAt" | "lockedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["clinicianReview"]>
 export type ClinicianReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   examination?: boolean | Prisma.ExaminationDefaultArgs<ExtArgs>
@@ -1781,6 +1896,10 @@ export type $ClinicianReviewPayload<ExtArgs extends runtime.Types.Extensions.Int
     predictionId: string | null
     reviewerId: string
     decision: $Enums.ReviewDecision
+    /**
+     * Clinician-confirmed DR grade 0-4 (null when not gradable or indeterminate).
+     */
+    confirmedGrade: number | null
     assessment: string
     referralUrgency: $Enums.ReferralUrgency
     referralReason: string | null
@@ -2225,6 +2344,7 @@ export interface ClinicianReviewFieldRefs {
   readonly predictionId: Prisma.FieldRef<"ClinicianReview", 'String'>
   readonly reviewerId: Prisma.FieldRef<"ClinicianReview", 'String'>
   readonly decision: Prisma.FieldRef<"ClinicianReview", 'ReviewDecision'>
+  readonly confirmedGrade: Prisma.FieldRef<"ClinicianReview", 'Int'>
   readonly assessment: Prisma.FieldRef<"ClinicianReview", 'String'>
   readonly referralUrgency: Prisma.FieldRef<"ClinicianReview", 'ReferralUrgency'>
   readonly referralReason: Prisma.FieldRef<"ClinicianReview", 'String'>

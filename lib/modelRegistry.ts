@@ -1,116 +1,49 @@
-import type { DrSeverityLevel, ModelRunMetadata, PredictionMode } from '@/types/prediction';
+/**
+ * Model registry (UI Deployment Guide, section 5). The deployed model is the
+ * distilled student (MobileNetV3-Large + LiteCBAM) running on the Raspberry Pi;
+ * the platform never runs a model itself. Every stored prediction references
+ * the artifact digest reported by the Pi, so each result is traceable.
+ */
+export const PREPROCESSING_VERSION = 'stage1-roi-224-v1';
 
-export interface ModelRegistryEntry {
-  id: string;
-  artifactFile: string;
-  artifactVersion: `sha256:${string}`;
-  task: string;
-  supportedConditions: readonly string[];
-  input: {
-    name: 'input';
-    dimensions: readonly [1, 3, number, number];
-    colorFormat: 'RGB';
-    resizeMethod: 'cover';
-    normalization: string;
-  };
-  output: {
-    name: 'output';
-    dimensions: readonly [1, number];
-    labels: readonly string[];
-    labelOrderVerified: false;
-    transform: 'softmax-from-logits';
-    transformVerifiedFromGraph: true;
-  };
-  decisionThreshold: number | null;
-  thresholdVerified: false;
-  preprocessingVersion: string;
-  preprocessingVerifiedAgainstTraining: false;
-  validationDataset: null;
-  validationMetrics: null;
-  intendedUse: string;
-  knownLimitations: readonly string[];
-  clinicalDeploymentStatus: 'blocked-pending-validation';
-}
+export const STUDENT_MODEL = {
+  id: 'opthaedge-dr-severity-student',
+  task: '5-grade diabetic retinopathy severity',
+  input: '1 × 3 × 224 × 224 RGB float32, range [0,1], ImageNet normalisation inside graph',
+  output: '1 × 5 logits (argmax = DR grade 0–4)',
+  labels: ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative DR'],
+  preprocessing: 'stage1-roi-224-v1 (Gaussian-difference denoise, Otsu ROI crop, 384 then 224 resize)',
+  training: 'Swin-B+CBAM teacher → MobileNetV3-L+LiteCBAM student (knowledge distillation), APTOS 2019, 80/20 stratified split',
+  qualityGate: 'Laplacian-variance sharpness and mean-brightness thresholds on the Pi (starting values; calibrate on Pi-imager images)',
+  validation: { n: 733, accuracy: 0.8145, qwk: 0.9033, macroF1: 0.6628, ocs: 0.795, macroAuc: 0.942 },
+  binaryMode: 'No separate binary model: any-DR probability = 1 − P(No DR). Validation sensitivity 99.2%, specificity 94.7% at the argmax threshold.',
+  limitations: [
+    'No separate test set; metrics are from the validation split.',
+    'Trained and validated on a single dataset (APTOS 2019).',
+    'Weaker on severe and proliferative DR (macro-F1 0.66).',
+    'Not yet tested on images from the 20D-lens prototype imager.',
+    'Does not assess diabetic macular edema, glaucoma, cataract or other eye disease.',
+    'Probabilities are not calibrated; confidence is not a clinical certainty.',
+  ],
+  status: 'research-only',
+  variants: [
+    {
+      file: 'student_fp32.onnx',
+      sha256: '3c5b87c8b37412fc332301401c32236291f00ec7b9f0a5e68480557b66b58947',
+      sizeMb: 12.21,
+      accuracy: 0.8145,
+      qwk: 0.9033,
+    },
+    {
+      file: 'student_int8.onnx',
+      sha256: '5364e95159c903f2deb787434cd5ada7a25fd4614f53d060eadcb54cfa21d34c',
+      sizeMb: 3.55,
+      accuracy: 0.7844,
+      qwk: 0.89,
+    },
+  ],
+} as const;
 
-export const MODEL_REGISTRY = {
-  binary: {
-    id: 'opthaedge-dr-binary',
-    artifactFile: 'retinal_binary_model.onnx',
-    artifactVersion: 'sha256:dfc49e28bb3927ec47691320a12ae95d9af86b64bc16dd1240d56903d798f0d0',
-    task: 'Binary diabetic-retinopathy screening',
-    supportedConditions: ['Diabetic retinopathy'],
-    input: {
-      name: 'input',
-      dimensions: [1, 3, 224, 224],
-      colorFormat: 'RGB',
-      resizeMethod: 'cover',
-      normalization: 'Per-channel ImageNet mean [0.485, 0.456, 0.406] and standard deviation [0.229, 0.224, 0.225]',
-    },
-    output: {
-      name: 'output',
-      dimensions: [1, 2],
-      labels: ['No DR', 'DR Detected'],
-      labelOrderVerified: false,
-      transform: 'softmax-from-logits',
-      transformVerifiedFromGraph: true,
-    },
-    decisionThreshold: 0.5,
-    thresholdVerified: false,
-    preprocessingVersion: 'binary-imagenet-cover-224-v1',
-    preprocessingVerifiedAgainstTraining: false,
-    validationDataset: null,
-    validationMetrics: null,
-    intendedUse: 'Research-only binary screening support for color fundus photographs.',
-    knownLimitations: [
-      'Training configuration, class order, threshold selection, calibration, and external validation evidence were not supplied.',
-      'No retinal-image quality model is available, so clinical gradability is not assessed.',
-      'The model is not validated for lesion localization or diagnosis of other ocular conditions.',
-    ],
-    clinicalDeploymentStatus: 'blocked-pending-validation',
-  },
-  severity: {
-    id: 'opthaedge-dr-severity-inceptionv3',
-    artifactFile: 'inceptionv3.onnx',
-    artifactVersion: 'sha256:a75ff338af12bb31b66e05403b4b8ab989ea7c2213aa42447642d6b348028836',
-    task: 'Five-level diabetic-retinopathy severity grading',
-    supportedConditions: ['Diabetic retinopathy'],
-    input: {
-      name: 'input',
-      dimensions: [1, 3, 299, 299],
-      colorFormat: 'RGB',
-      resizeMethod: 'cover',
-      normalization: 'Keras InceptionV3 scaling: pixel / 127.5 - 1.0',
-    },
-    output: {
-      name: 'output',
-      dimensions: [1, 5],
-      labels: ['No DR', 'Mild', 'Moderate', 'Severe', 'Proliferative'] satisfies readonly DrSeverityLevel[],
-      labelOrderVerified: false,
-      transform: 'softmax-from-logits',
-      transformVerifiedFromGraph: true,
-    },
-    decisionThreshold: null,
-    thresholdVerified: false,
-    preprocessingVersion: 'severity-inception-cover-299-v1',
-    preprocessingVerifiedAgainstTraining: false,
-    validationDataset: null,
-    validationMetrics: null,
-    intendedUse: 'Research-only five-level DR model-output review for color fundus photographs.',
-    knownLimitations: [
-      'Training configuration, class order, calibration, and external validation evidence were not supplied.',
-      'No retinal-image quality model is available, so clinical gradability is not assessed.',
-      'The model is not validated for lesion localization, macular edema confirmation, or referral urgency.',
-    ],
-    clinicalDeploymentStatus: 'blocked-pending-validation',
-  },
-} as const satisfies Record<PredictionMode, ModelRegistryEntry>;
-
-export function getModelRunMetadata(mode: PredictionMode): ModelRunMetadata {
-  const model = MODEL_REGISTRY[mode];
-  return {
-    modelId: model.id,
-    artifactVersion: model.artifactVersion,
-    preprocessingVersion: model.preprocessingVersion,
-    clinicalDeploymentStatus: model.clinicalDeploymentStatus,
-  };
+export function findStudentVariant(sha256: string) {
+  return STUDENT_MODEL.variants.find((variant) => variant.sha256 === sha256) ?? null;
 }
