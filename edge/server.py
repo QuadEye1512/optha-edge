@@ -36,6 +36,14 @@ pipe = pipeline.from_env(runtime="edge")
 sess = pipe.sess  # kept for test_parity.py
 
 app = FastAPI(title="OpthaEdge inference", version="1.1.0")
+@app.get("/")
+async def root():
+    return {
+        "status": "ok",
+        "message": "OpthaEdge inference API is running",
+        "docs": "/docs",
+        "version": "1.1.0"
+    }
 
 
 def require_key(x_inference_key: str = Header(default="")):
